@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>クレオスタディ三田教室 トップページリニューアル案 比較</title>
+<meta name="robots" content="noindex, nofollow" />
+<style>
+  body {
+    margin: 0;
+    font-family: "Noto Sans JP", -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #FBF8F3;
+    color: #3A3530;
+  }
+  header {
+    padding: 48px 24px 32px;
+    text-align: center;
+  }
+  header img {
+    height: 48px;
+    margin-bottom: 20px;
+  }
+  h1 {
+    font-size: 24px;
+    margin: 0 0 8px;
+  }
+  p.lead {
+    color: #655D53;
+    font-size: 15px;
+    line-height: 1.8;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 24px 64px;
+  }
+  .card {
+    background: #FFFFFF;
+    border: 1px solid #EEE6D8;
+    border-radius: 16px;
+    padding: 28px;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow .2s, transform .2s;
+    display: block;
+  }
+  .card:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+  }
+  .card .label {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    color: #B8860B;
+    background: #FEF3D6;
+    padding: 4px 12px;
+    border-radius: 100px;
+    margin-bottom: 14px;
+  }
+  .card h2 {
+    font-size: 18px;
+    margin: 0 0 8px;
+  }
+  .card p {
+    font-size: 13.5px;
+    line-height: 1.8;
+    color: #6B6154;
+    margin: 0;
+  }
+  footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+    color: #948C81;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <img src="assets/creo-logo-mark.png" alt="クレオスタディ" />
+    <h1>三田教室 トップページリニューアル案</h1>
+    <p class="lead">同じ構成・同じコピーに対する3つの異なる視覚的方向性です。気になる案をクリックしてご覧ください。</p>
+  </header>
+  <div class="cards">
+    <a class="card" href="creo-study-mita-A-soft-light.html">
+      <span class="label">Pattern A</span>
+      <h2>やわらかな余白</h2>
+      <p>丸みと余白で、やさしく迎える。ロゴの4色を柔らかく使う、あたたかい印象。</p>
+    </a>
+    <a class="card" href="creo-study-mita-B-quiet-intelligence.html">
+      <span class="label">Pattern B</span>
+      <h2>静かな知性</h2>
+      <p>明朝の見出しと細い罫線、章立ての構成で、落ち着いた信頼感を伝える。</p>
+    </a>
+    <a class="card" href="creo-study-mita-C-bold-modern.html">
+      <span class="label">Pattern C</span>
+      <h2>個性が、かたちになる</h2>
+      <p>大きな見出しと原色のドットモチーフで、自信を持って語る現代的な一枚。</p>
+    </a>
+  </div>
+  <footer>この3案は比較検討用のリファレンスです。方向性が決まり次第、選定案のみを本実装します。</footer>
+</body>
+</html>
