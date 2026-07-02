@@ -47,9 +47,11 @@
   .rv.on { opacity: 1; transform: none; }
 
   /* ---- header ---- */
-  .site-header { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; padding: 18px 56px; border-bottom: 1px solid var(--line); background: rgba(251,248,243,.88); transition: padding .35s ease, box-shadow .35s ease; }
+  .site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; padding: 18px 56px; border-bottom: 1px solid transparent; background: transparent; transition: padding .35s ease, box-shadow .35s ease, background .4s ease, border-color .4s ease; }
+  .site-header.scrolled { background: rgba(251,248,243,.88); border-bottom-color: var(--line); }
   /* backdrop-filter は fixed 子要素（モバイルナビ）の包含ブロックを作るため、疑似要素側に置く */
-  .site-header::before { content: ""; position: absolute; inset: 0; z-index: -1; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  .site-header::before { content: ""; position: absolute; inset: 0; z-index: -1; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); opacity: 0; transition: opacity .4s ease; }
+  .site-header.scrolled::before { opacity: 1; }
   .site-header.scrolled { padding: 10px 56px; box-shadow: 0 6px 24px rgba(58,53,48,.06); }
   .site-header .logo { height: 62px; width: auto; transition: height .35s ease; }
   .site-header.scrolled .logo { height: 46px; }
@@ -67,31 +69,76 @@
   body.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
   body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
 
-  /* ---- hero ---- */
-  .hero { padding: 88px 56px 96px; position: relative; overflow: hidden; }
-  .hero-glow { position: absolute; top: -80px; right: -80px; width: 340px; height: 340px; border-radius: 50%; background: radial-gradient(circle, var(--pale-gold) 0%, rgba(254,243,214,0) 70%); pointer-events: none; }
-  .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 64px; align-items: center; position: relative; max-width: 1200px; margin: 0 auto; }
-  .hero-badge { display: inline-flex; align-items: center; gap: 10px; padding: 8px 18px 8px 10px; background: var(--card); border: 1px solid var(--line); border-radius: 100px; margin-bottom: 28px; }
+  /* ---- hero (fullscreen) ---- */
+  .hero { position: relative; height: 100svh; min-height: 640px; display: flex; align-items: center; overflow: hidden; padding: 0 56px; }
+  .hero-bg { position: absolute; inset: -12% 0; will-change: transform; }
+  .hero-bg img { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.08); transition: transform 2.4s var(--rv-e); }
+  body:not(.is-loading) .hero-bg img { transform: scale(1); }
+  .hero-veil { position: absolute; inset: 0; background: linear-gradient(100deg, rgba(251,248,243,.94) 0%, rgba(251,248,243,.72) 38%, rgba(251,248,243,.18) 68%, rgba(251,248,243,0) 100%); }
+  .hero-inner { position: relative; max-width: 1200px; margin: 0 auto; width: 100%; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 10px; padding: 8px 18px 8px 10px; background: var(--card); border: 1px solid var(--line); border-radius: 100px; margin-bottom: 30px; }
   .dots { display: inline-flex; gap: 4px; }
   .dots i { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
-  .hero h1 { font-family: var(--round); font-weight: 800; font-size: 50px; line-height: 1.5; margin: 0 0 28px; letter-spacing: .01em; }
+  .hero h1 { font-family: var(--round); font-weight: 800; font-size: clamp(40px, 5.2vw, 68px); line-height: 1.42; margin: 0 0 28px; letter-spacing: .01em; }
   .hero h1 em { font-style: normal; color: var(--gold); }
   .hero-lead { font-size: 17px; line-height: 2.05; color: var(--sub); max-width: 470px; margin: 0 0 40px; }
   .btn-primary { display: inline-flex; align-items: center; gap: 10px; padding: 17px 32px; background: var(--ink); color: var(--bg); font-weight: 600; font-size: 15px; border-radius: 100px; transition: background .3s ease, transform .3s ease, box-shadow .3s ease; }
   .btn-primary:hover { background: #242019; transform: translateY(-2px); box-shadow: 0 10px 24px rgba(58,53,48,.18); }
   .btn-ghost { display: inline-flex; align-items: center; gap: 8px; padding: 17px 4px; font-weight: 500; font-size: 15px; border-bottom: 1px solid var(--ink); transition: color .3s ease, border-color .3s ease; }
   .btn-ghost:hover { color: var(--gold); border-color: var(--gold); }
-  .hero-visual { position: relative; }
-  .hero-photo { width: 100%; height: 440px; border-radius: 28px; overflow: hidden; }
-  .hero-photo img { width: 100%; height: 100%; object-fit: cover; animation: kenburns 18s ease-in-out infinite alternate; }
-  @keyframes kenburns { from { transform: scale(1); } to { transform: scale(1.06); } }
-  .deco { position: absolute; border-radius: 50%; }
-  .deco-1 { top: -20px; left: -20px; width: 52px; height: 52px; background: var(--dot-coral); border: 6px solid var(--bg); animation: floaty 6s ease-in-out infinite; }
-  .deco-2 { bottom: -16px; right: 28px; width: 36px; height: 36px; background: var(--dot-aqua); border: 5px solid var(--bg); animation: floaty 7s ease-in-out infinite reverse; }
-  .deco-3 { bottom: 56px; left: -26px; width: 24px; height: 24px; background: var(--dot-green); border: 4px solid var(--bg); animation: floaty 5s ease-in-out 1s infinite; }
+  .deco { position: absolute; border-radius: 50%; z-index: 2; }
+  .deco-1 { top: 16%; right: 11%; width: 52px; height: 52px; background: var(--dot-coral); border: 6px solid var(--bg); animation: floaty 6s ease-in-out infinite; }
+  .deco-2 { bottom: 22%; right: 26%; width: 36px; height: 36px; background: var(--dot-aqua); border: 5px solid var(--bg); animation: floaty 7s ease-in-out infinite reverse; }
+  .deco-3 { bottom: 32%; right: 5%; width: 24px; height: 24px; background: var(--dot-green); border: 4px solid var(--bg); animation: floaty 5s ease-in-out 1s infinite; }
   @keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
-  .hero-in { opacity: 0; transform: translateY(22px); animation: heroIn .9s var(--rv-e) forwards; }
+  .hero-in { opacity: 0; transform: translateY(26px); }
+  body:not(.is-loading) .hero-in { animation: heroIn .9s var(--rv-e) forwards; }
   @keyframes heroIn { to { opacity: 1; transform: none; } }
+
+  /* ---- char split (masked rise) ---- */
+  .sl { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: .08em; margin-bottom: -.08em; }
+  .ch { display: inline-block; transform: translateY(118%); transition: transform .8s var(--rv-e); transition-delay: calc(var(--i) * .04s); }
+  .split.on .ch { transform: none; }
+
+  /* ---- scroll cue ---- */
+  .scroll-cue { position: absolute; right: 56px; bottom: 34px; display: flex; flex-direction: column; align-items: center; gap: 10px; z-index: 2; }
+  .scroll-cue span { font-size: 10.5px; font-weight: 600; letter-spacing: .22em; color: var(--sub); writing-mode: vertical-rl; }
+  .scroll-cue i { width: 1px; height: 56px; background: rgba(58,53,48,.25); position: relative; overflow: hidden; display: block; }
+  .scroll-cue i::after { content: ""; position: absolute; left: 0; top: -100%; width: 100%; height: 100%; background: var(--gold); animation: cue 1.8s cubic-bezier(.65,0,.35,1) infinite; }
+  @keyframes cue { to { top: 100%; } }
+
+  /* ---- loader ---- */
+  body.is-loading { overflow: hidden; }
+  .loader { position: fixed; inset: 0; z-index: 100; background: var(--bg); display: flex; align-items: center; justify-content: center; clip-path: inset(0); transition: clip-path .8s cubic-bezier(.76,0,.24,1); }
+  .loader.done { clip-path: inset(0 0 100% 0); }
+  .loader-dots { display: flex; gap: 10px; justify-content: center; margin-bottom: 18px; }
+  .loader-dots i { width: 14px; height: 14px; border-radius: 50%; animation: lbounce 1s ease-in-out infinite; }
+  .loader-dots i:nth-child(2) { animation-delay: .12s; }
+  .loader-dots i:nth-child(3) { animation-delay: .24s; }
+  .loader-dots i:nth-child(4) { animation-delay: .36s; }
+  @keyframes lbounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+  .loader-num { font-family: var(--round); font-weight: 800; font-size: 15px; color: var(--faint); text-align: center; }
+
+  /* ---- marquee ---- */
+  .marquee { overflow: hidden; white-space: nowrap; padding: 24px 0; background: var(--card); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .mq-track { display: inline-flex; align-items: center; animation: mq 30s linear infinite; will-change: transform; }
+  .mq-track > span { display: inline-flex; align-items: center; gap: 34px; padding-right: 34px; font-family: var(--round); font-weight: 800; font-size: 22px; color: var(--ink); }
+  .mq-track .mdot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex: none; }
+  .mq-en { font: 700 14px/1 ui-monospace, monospace; letter-spacing: .18em; color: var(--faint); }
+  @keyframes mq { to { transform: translateX(-50%); } }
+
+  /* ---- photo clip reveal ---- */
+  .ph { clip-path: inset(0 100% 0 0); transition: clip-path 1s var(--rv-e); }
+  .ph img { transform: scale(1.14); transition: transform 1.3s var(--rv-e); }
+  .ph.on { clip-path: inset(0); }
+  .ph.on img { transform: none; }
+
+  /* ---- floating CTA ---- */
+  .float-cta { position: fixed; right: 28px; bottom: 92px; z-index: 40; display: flex; flex-direction: column; gap: 3px; padding: 16px 22px; background: var(--ink); color: var(--bg); border-radius: 18px; box-shadow: 0 14px 34px rgba(58,53,48,.24); opacity: 0; transform: translateY(14px); pointer-events: none; transition: opacity .4s ease, transform .4s var(--rv-e), background .3s ease; }
+  .float-cta.show { opacity: 1; transform: none; pointer-events: auto; }
+  .float-cta:hover { background: #242019; }
+  .float-cta b { font-size: 15px; font-weight: 700; }
+  .float-cta span { font-size: 11.5px; color: rgba(251,248,243,.75); }
 
   /* ---- section scaffolding ---- */
   .section { padding: 96px 56px; }
@@ -206,10 +253,13 @@
     body.nav-open .site-nav { transform: none; visibility: visible; transition: transform .45s var(--rv-e), visibility 0s 0s; }
     .site-nav a { font-size: 17px; }
     .nav-toggle { display: block; z-index: 70; }
-    .hero { padding: 56px 20px 64px; }
-    .hero-grid { grid-template-columns: 1fr; gap: 44px; }
+    .hero { padding: 0 20px; min-height: 560px; }
     .hero h1 { font-size: 34px; }
-    .hero-photo { height: 320px; }
+    .deco { display: none; }
+    .hero-veil { background: linear-gradient(115deg, rgba(251,248,243,.95) 0%, rgba(251,248,243,.82) 50%, rgba(251,248,243,.4) 100%); }
+    .scroll-cue { right: 20px; }
+    .mq-track > span { font-size: 16px; gap: 22px; padding-right: 22px; }
+    .float-cta { right: 16px; bottom: 88px; padding: 13px 18px; }
     .section, .about, .footer { padding-left: 20px; padding-right: 20px; }
     .section { padding-top: 72px; padding-bottom: 72px; }
     .sec-head h2 { font-size: 26px; }
@@ -223,11 +273,25 @@
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .rv, .hero-in { opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important; }
-    .hero-photo img, .deco { animation: none !important; }
+    .hero-bg img, .deco { animation: none !important; transform: none !important; transition: none !important; }
+    .ch { transform: none !important; transition: none !important; }
+    .ph { clip-path: none !important; transition: none !important; }
+    .ph img { transform: none !important; }
+    .mq-track { animation: none !important; }
+    .loader { display: none !important; }
+    .scroll-cue i::after { animation: none !important; }
+    .float-cta { transition: opacity .2s ease !important; transform: none !important; }
   }
 </style>
 </head>
-<body>
+<body class="is-loading">
+
+  <div class="loader" aria-hidden="true">
+    <div class="loader-inner">
+      <div class="loader-dots"><i style="background:var(--dot-gold)"></i><i style="background:var(--dot-coral)"></i><i style="background:var(--dot-aqua)"></i><i style="background:var(--dot-green)"></i></div>
+      <div class="loader-num">0</div>
+    </div>
+  </div>
 
   <header class="site-header">
     <a href="#top"><img class="logo" src="assets/creo-logo-mark.png" alt="Creo Study"></a>
@@ -243,32 +307,36 @@
   </header>
 
   <section class="hero" id="top">
-    <div class="hero-glow"></div>
-    <div class="hero-grid">
-      <div>
-        <div class="hero-badge hero-in" style="animation-delay:.05s">
-          <span class="dots"><i style="background:var(--dot-gold)"></i><i style="background:var(--dot-coral)"></i><i style="background:var(--dot-aqua)"></i><i style="background:var(--dot-green)"></i></span>
-          <span style="font:500 13px/1 var(--sans);color:#7A736A;">学習塾 クレオスタディ 三田教室</span>
-        </div>
-        <h1 class="hero-in" style="animation-delay:.18s">自ら考える力を、<br>自ら<em>学び続ける力</em>に。</h1>
-        <p class="hero-lead hero-in" style="animation-delay:.32s">
-          クレオスタディだからできる、学びのナビゲート。<br>
-          少人数グループ指導と個別指導、その両方を用意して、<br>
-          お子さま一人ひとりに合った「最適な学び方」をご提案します。
-        </p>
-        <div class="hero-in" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;animation-delay:.46s">
-          <a class="btn-primary" href="#pt-contact">お問い合わせ</a>
-          <a class="btn-ghost" href="#pt-flow">無料体験・資料請求 →</a>
-        </div>
+    <div class="hero-bg"><img src="assets/generated/hero-fullscreen-a.jpeg" alt="クレオスタディ三田教室で学ぶ生徒たち（イメージ）"></div>
+    <div class="hero-veil"></div>
+    <div class="hero-inner">
+      <div class="hero-badge hero-in" style="animation-delay:.15s">
+        <span class="dots"><i style="background:var(--dot-gold)"></i><i style="background:var(--dot-coral)"></i><i style="background:var(--dot-aqua)"></i><i style="background:var(--dot-green)"></i></span>
+        <span style="font:500 13px/1 var(--sans);color:#7A736A;">学習塾 クレオスタディ 三田教室</span>
       </div>
-      <div class="hero-visual hero-in" style="animation-delay:.3s">
-        <div class="hero-photo"><img src="assets/generated/hero-mita-v3.jpeg" alt="クレオスタディ三田教室で学ぶ生徒たち（イメージ）"></div>
-        <div class="deco deco-1"></div>
-        <div class="deco deco-2"></div>
-        <div class="deco deco-3"></div>
+      <h1 data-split>自ら考える力を、<br>自ら<em>学び続ける力</em>に。</h1>
+      <p class="hero-lead hero-in" style="animation-delay:.85s">
+        クレオスタディだからできる、学びのナビゲート。<br>
+        少人数グループ指導と個別指導、その両方を用意して、<br>
+        お子さま一人ひとりに合った「最適な学び方」をご提案します。
+      </p>
+      <div class="hero-in" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;animation-delay:1.05s">
+        <a class="btn-primary" href="#pt-contact">お問い合わせ</a>
+        <a class="btn-ghost" href="#pt-flow">無料体験・資料請求 →</a>
       </div>
     </div>
+    <div class="deco deco-1"></div>
+    <div class="deco deco-2"></div>
+    <div class="deco deco-3"></div>
+    <div class="scroll-cue"><span>SCROLL</span><i></i></div>
   </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="mq-track">
+      <span>自ら考える力を、自ら学び続ける力に。<i class="mdot" style="background:var(--dot-gold)"></i><span class="mq-en">CREO STUDY MITA</span><i class="mdot" style="background:var(--dot-coral)"></i>少人数グループ指導 × 個別指導<i class="mdot" style="background:var(--dot-aqua)"></i><span class="mq-en">MITA / MINATO, TOKYO</span><i class="mdot" style="background:var(--dot-green)"></i></span>
+      <span>自ら考える力を、自ら学び続ける力に。<i class="mdot" style="background:var(--dot-gold)"></i><span class="mq-en">CREO STUDY MITA</span><i class="mdot" style="background:var(--dot-coral)"></i>少人数グループ指導 × 個別指導<i class="mdot" style="background:var(--dot-aqua)"></i><span class="mq-en">MITA / MINATO, TOKYO</span><i class="mdot" style="background:var(--dot-green)"></i></span>
+    </div>
+  </div>
 
   <section id="pt-policy" class="section" style="background:var(--card)">
     <div class="wrap">
@@ -308,7 +376,7 @@
       <p class="course-sub rv">小学生向け講座</p>
       <div class="course-grid3 rv" data-stagger>
         <div class="card course-card">
-          <div class="course-photo"><img src="assets/mita-photos/advanced.jpg" alt="アドバンスドプログラムの授業風景"></div>
+          <div class="course-photo ph"><img src="assets/mita-photos/advanced.jpg" alt="アドバンスドプログラムの授業風景"></div>
           <div class="course-body" style="border-top:5px solid var(--dot-gold)">
           <div class="course-num" style="color:var(--gold);margin-top:16px">01</div>
           <span class="course-target">小3〜小6</span>
@@ -318,7 +386,7 @@
           </div>
         </div>
         <div class="card course-card">
-          <div class="course-photo"><img src="assets/mita-photos/puzzle.jpg" alt="パズル算数の教材"></div>
+          <div class="course-photo ph"><img src="assets/mita-photos/puzzle.jpg" alt="パズル算数の教材"></div>
           <div class="course-body" style="border-top:5px solid var(--dot-coral)">
           <div class="course-num" style="color:var(--coral);margin-top:16px">02</div>
           <span class="course-target">小1〜小6</span>
@@ -328,7 +396,7 @@
           </div>
         </div>
         <div class="card course-card">
-          <div class="course-photo"><img src="assets/mita-photos/yomitoku.jpg" alt="読みとく国語の教材"></div>
+          <div class="course-photo ph"><img src="assets/mita-photos/yomitoku.jpg" alt="読みとく国語の教材"></div>
           <div class="course-body" style="border-top:5px solid var(--dot-aqua)">
           <div class="course-num" style="color:var(--aqua);margin-top:16px">03</div>
           <span class="course-target">小1〜小6</span>
@@ -342,7 +410,7 @@
       <p class="course-sub rv">個別指導</p>
       <div class="course-grid2 rv" data-stagger>
         <div class="card course-card">
-          <div class="course-photo"><img src="assets/mita-photos/private1on1.jpg" alt="個別指導1対1の授業風景"></div>
+          <div class="course-photo ph"><img src="assets/mita-photos/private1on1.jpg" alt="個別指導1対1の授業風景"></div>
           <div class="course-body" style="border-top:5px solid var(--dot-gold)">
           <div class="course-num" style="color:var(--gold);margin-top:16px">04</div>
           <span class="course-target">小3〜中3</span>
@@ -352,7 +420,7 @@
           </div>
         </div>
         <div class="card course-card">
-          <div class="course-photo"><img src="assets/mita-photos/private1on2.jpg" alt="個別指導1対2の授業風景"></div>
+          <div class="course-photo ph"><img src="assets/mita-photos/private1on2.jpg" alt="個別指導1対2の授業風景"></div>
           <div class="course-body" style="border-top:5px solid var(--dot-aqua)">
           <div class="course-num" style="color:var(--aqua);margin-top:16px">05</div>
           <span class="course-target">小3〜中3</span>
@@ -375,7 +443,7 @@
       </div>
       <div class="room-grid rv" data-stagger>
         <div class="room-card">
-          <div class="room-photo"><img src="assets/mita-photos/room-group.jpg" alt="グループ教室の様子"></div>
+          <div class="room-photo ph"><img src="assets/mita-photos/room-group.jpg" alt="グループ教室の様子"></div>
           <div class="room-body" style="background:var(--pale-gold)">
           <div class="room-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="7" cy="8" r="2.6" stroke="#B8860B" stroke-width="1.5"/><circle cx="17" cy="8" r="2.6" stroke="#B8860B" stroke-width="1.5"/><path d="M2.5 19c0-3 2-5 4.5-5s4.5 2 4.5 5M12.5 19c0-3 2-5 4.5-5s4.5 2 4.5 5" stroke="#B8860B" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -385,7 +453,7 @@
           </div>
         </div>
         <div class="room-card">
-          <div class="room-photo"><img src="assets/mita-photos/room-booth.jpg" alt="個別ブースの様子"></div>
+          <div class="room-photo ph"><img src="assets/mita-photos/room-booth.jpg" alt="個別ブースの様子"></div>
           <div class="room-body" style="background:var(--pale-aqua)">
           <div class="room-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="12" rx="2" stroke="#1A93BE" stroke-width="1.5"/><path d="M12 4v12M3 10h18" stroke="#1A93BE" stroke-width="1.5"/></svg>
@@ -395,7 +463,7 @@
           </div>
         </div>
         <div class="room-card">
-          <div class="room-photo"><img src="assets/mita-photos/room-selfstudy.jpg" alt="自習室の様子"></div>
+          <div class="room-photo ph"><img src="assets/mita-photos/room-selfstudy.jpg" alt="自習室の様子"></div>
           <div class="room-body" style="background:var(--pale-coral)">
           <div class="room-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 19V7l8-3 8 3v12" stroke="#D9604E" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 19v-6h6v6" stroke="#D9604E" stroke-width="1.5" stroke-linejoin="round"/></svg>
@@ -557,6 +625,7 @@
     </div>
   </footer>
 
+  <a class="float-cta" href="https://www.creo-study.com/contact-trial/" target="_blank" rel="noopener"><b>無料体験 受付中</b><span>お申込みはこちら →</span></a>
   <button class="to-top" aria-label="ページ上部へ戻る">↑</button>
 
 <script>
@@ -566,6 +635,59 @@
   /* motion personality — A: soft, floaty rise (values live in CSS :root) */
   var STAGGER = 90;
   var ONCE = true;
+  var LOADER_MS = 1100;
+
+  /* split display headings into masked chars */
+  function splitChars(el) {
+    var idx = 0;
+    function wrapText(node, parent) {
+      var text = node.textContent;
+      var sl = document.createElement('span'); sl.className = 'sl';
+      for (var i = 0; i < text.length; i++) {
+        var ch = document.createElement('span'); ch.className = 'ch';
+        ch.style.setProperty('--i', idx++);
+        ch.textContent = text[i];
+        sl.appendChild(ch);
+      }
+      parent.appendChild(sl);
+    }
+    var nodes = Array.prototype.slice.call(el.childNodes);
+    el.innerHTML = '';
+    nodes.forEach(function (node) {
+      if (node.nodeType === 3) { wrapText(node, el); }
+      else if (node.nodeName === 'BR') { el.appendChild(node); }
+      else { var shell = node.cloneNode(false); wrapText(node, shell); el.appendChild(shell); }
+    });
+    el.classList.add('split');
+  }
+  var heroTitle = document.querySelector('.hero h1[data-split]');
+  var sectionTitles = document.querySelectorAll('.sec-head h2, .about-inner h2');
+  if (!reduced) {
+    if (heroTitle) splitChars(heroTitle);
+    sectionTitles.forEach(splitChars);
+  }
+
+  /* loader: count to 100, then curtain-wipe and release the hero */
+  var loader = document.querySelector('.loader');
+  var num = document.querySelector('.loader-num');
+  function endLoad() {
+    document.body.classList.remove('is-loading');
+    if (loader) { loader.classList.add('done'); setTimeout(function () { loader.remove(); }, 900); }
+    if (heroTitle) setTimeout(function () { heroTitle.classList.add('on'); }, 200);
+  }
+  if (reduced || !loader) {
+    if (loader) loader.remove();
+    document.body.classList.remove('is-loading');
+    if (heroTitle) heroTitle.classList.add('on');
+  } else {
+    var t0 = null;
+    requestAnimationFrame(function tick(t) {
+      if (t0 === null) t0 = t;
+      var p = Math.min(1, (t - t0) / LOADER_MS);
+      if (num) num.textContent = Math.round(p * 100);
+      if (p < 1) requestAnimationFrame(tick); else setTimeout(endLoad, 120);
+    });
+  }
 
   document.querySelectorAll('[data-stagger]').forEach(function (group) {
     Array.prototype.forEach.call(group.children, function (child, i) {
@@ -574,6 +696,8 @@
     });
   });
 
+  /* reveal observer: .rv rise / .ph clip wipe / split headings */
+  var targets = document.querySelectorAll('.rv, .ph, h2.split');
   if (!reduced && 'IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
@@ -585,17 +709,29 @@
         }
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -7% 0px' });
-    document.querySelectorAll('.rv').forEach(function (el) { io.observe(el); });
+    targets.forEach(function (el) { io.observe(el); });
   } else {
-    document.querySelectorAll('.rv').forEach(function (el) { el.classList.add('on'); });
+    targets.forEach(function (el) { el.classList.add('on'); });
   }
 
+  /* scroll: header state / hero parallax / floating CTA / back-to-top */
   var header = document.querySelector('.site-header');
   var toTop = document.querySelector('.to-top');
+  var floatCta = document.querySelector('.float-cta');
+  var heroBg = document.querySelector('.hero-bg');
+  var ticking = false;
+  function onScroll() {
+    var sy = window.scrollY;
+    header.classList.toggle('scrolled', sy > 24);
+    toTop.classList.toggle('show', sy > 600);
+    if (floatCta) floatCta.classList.toggle('show', sy > window.innerHeight * 0.7);
+    if (heroBg && !reduced && sy < window.innerHeight * 1.2) heroBg.style.transform = 'translateY(' + sy * 0.35 + 'px)';
+    ticking = false;
+  }
   window.addEventListener('scroll', function () {
-    header.classList.toggle('scrolled', window.scrollY > 24);
-    toTop.classList.toggle('show', window.scrollY > 600);
+    if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
   }, { passive: true });
+  onScroll();
 
   toTop.addEventListener('click', function () {
     window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });

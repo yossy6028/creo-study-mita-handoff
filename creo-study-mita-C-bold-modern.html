@@ -49,9 +49,19 @@
   .rv.on { opacity: 1; transform: none; }
 
   /* ---- header ---- */
-  .site-header { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; padding: 20px 56px; background: rgba(255,255,255,.88); transition: padding .35s ease, box-shadow .35s ease; }
+  .site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; padding: 20px 56px; background: transparent; transition: padding .35s ease, box-shadow .35s ease, background .4s ease; }
+  .site-header.scrolled { background: rgba(255,255,255,.88); }
   /* backdrop-filter は fixed 子要素（モバイルナビ）の包含ブロックを作るため、疑似要素側に置く */
-  .site-header::before { content: ""; position: absolute; inset: 0; z-index: -1; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  .site-header::before { content: ""; position: absolute; inset: 0; z-index: -1; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); opacity: 0; transition: opacity .4s ease; }
+  .site-header.scrolled::before { opacity: 1; }
+  /* 暗いヒーローの上（未スクロール時）はナビを白抜きに */
+  .site-header:not(.scrolled) .site-nav a { color: #fff; }
+  .site-header:not(.scrolled) .site-nav a:hover { background: rgba(255,255,255,.14); }
+  .site-header:not(.scrolled) .site-nav a.nav-cta { background: #fff; color: var(--dark); }
+  .site-header:not(.scrolled) .nav-toggle { background: transparent; border-color: #fff; }
+  .site-header:not(.scrolled) .nav-toggle span { background: #fff; }
+  body.nav-open .nav-toggle { background: #fff !important; border-color: var(--dark) !important; }
+  body.nav-open .nav-toggle span { background: var(--dark) !important; }
   .site-header.scrolled { padding: 10px 56px; box-shadow: 0 8px 30px rgba(28,27,34,.08); }
   .site-header .logo { height: 66px; width: auto; transition: height .35s ease; }
   .site-header.scrolled .logo { height: 48px; }
@@ -69,30 +79,76 @@
   body.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
   body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
 
-  /* ---- hero ---- */
-  .hero-copy { padding: 64px 56px 0; max-width: 1232px; margin: 0 auto; }
-  .hero-copy-inner { max-width: 760px; margin: 0 0 52px; }
-  .hero-badge { display: inline-flex; align-items: center; gap: 9px; padding: 7px 16px 7px 8px; border: 1.5px solid var(--dark); border-radius: 100px; margin-bottom: 32px; }
+  /* ---- hero (fullscreen, dark) ---- */
+  .hero { position: relative; height: 100svh; min-height: 640px; display: flex; align-items: center; overflow: hidden; padding: 0 56px; background: var(--dark); }
+  .hero-bg { position: absolute; inset: -12% 0; will-change: transform; }
+  .hero-bg img { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.1); transition: transform 2.2s var(--rv-e); }
+  body:not(.is-loading) .hero-bg img { transform: scale(1); }
+  .hero-veil { position: absolute; inset: 0; background: linear-gradient(85deg, rgba(28,27,34,.9) 0%, rgba(28,27,34,.55) 45%, rgba(28,27,34,.12) 75%, rgba(28,27,34,0) 100%); }
+  .hero-inner { position: relative; max-width: 1232px; margin: 0 auto; width: 100%; color: #fff; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 9px; padding: 7px 16px 7px 8px; border: 1.5px solid rgba(255,255,255,.85); border-radius: 100px; margin-bottom: 32px; color: #fff; }
   .badge-wheel { width: 20px; height: 20px; border-radius: 50%; background: conic-gradient(var(--dot-gold) 0deg 90deg, var(--dot-coral) 90deg 180deg, var(--dot-aqua) 180deg 270deg, var(--dot-green) 270deg 360deg); display: inline-block; animation: spin 14s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
-  .hero-copy h1 { font-family: var(--head); font-weight: 900; font-size: 58px; line-height: 1.35; margin: 0 0 30px; letter-spacing: -.02em; }
-  .hero-lead { font-size: 16.5px; line-height: 1.95; color: var(--sub); max-width: 560px; margin: 0 0 40px; }
+  .hero h1 { font-family: var(--head); font-weight: 900; font-size: clamp(44px, 6vw, 82px); line-height: 1.3; margin: 0 0 30px; letter-spacing: -.02em; color: #fff; }
+  .hero-lead { font-size: 16.5px; line-height: 1.95; color: rgba(255,255,255,.78); max-width: 560px; margin: 0 0 40px; }
+  .hero .btn-primary { background: var(--dot-gold); color: var(--dark); }
+  .hero .btn-outline { border-color: rgba(255,255,255,.6); color: #fff; }
+  .hero .btn-outline:hover { background: #fff; color: var(--dark); }
   .btn-primary { display: inline-block; font-weight: 700; font-size: 15px; padding: 18px 34px; background: var(--dark); color: #fff; border-radius: 100px; transition: transform .3s ease, box-shadow .3s ease; }
   .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(28,27,34,.26); }
   .btn-outline { display: inline-block; font-weight: 600; font-size: 15px; padding: 16.5px 26px; border: 1.5px solid var(--dark); border-radius: 100px; transition: background .3s ease, color .3s ease; }
   .btn-outline:hover { background: var(--dark); color: #fff; }
-  .hero-visual { padding: 0 56px 100px; position: relative; max-width: 1232px; margin: 0 auto; }
-  .hero-photo { width: 100%; height: 440px; border-radius: 32px; overflow: hidden; }
-  .hero-photo img { width: 100%; height: 100%; object-fit: cover; animation: kenburns 16s ease-in-out infinite alternate; }
-  @keyframes kenburns { from { transform: scale(1); } to { transform: scale(1.07); } }
-  .dot-cluster { position: absolute; top: 24px; left: 80px; display: grid; grid-template-columns: repeat(4, 14px); gap: 8px; }
+  .dot-cluster { position: absolute; right: 7%; bottom: 16%; display: grid; grid-template-columns: repeat(4, 14px); gap: 8px; z-index: 2; }
   .dot-cluster span { width: 14px; height: 14px; border-radius: 50%; display: block; animation: pulse 2.8s ease-in-out infinite; }
   .dot-cluster span:nth-child(2) { animation-delay: .35s; }
   .dot-cluster span:nth-child(3) { animation-delay: .7s; }
   .dot-cluster span:nth-child(4) { animation-delay: 1.05s; }
   @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.35); } }
-  .hero-in { opacity: 0; transform: translateY(30px); animation: heroIn .8s var(--rv-e) forwards; }
+  .hero-in { opacity: 0; transform: translateY(30px); }
+  body:not(.is-loading) .hero-in { animation: heroIn .8s var(--rv-e) forwards; }
   @keyframes heroIn { to { opacity: 1; transform: none; } }
+
+  /* ---- char split (snappy rise) ---- */
+  .sl { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: .08em; margin-bottom: -.08em; }
+  .ch { display: inline-block; transform: translateY(118%); transition: transform .55s var(--rv-e); transition-delay: calc(var(--i) * .028s); }
+  .split.on .ch { transform: none; }
+
+  /* ---- scroll cue ---- */
+  .scroll-cue { position: absolute; right: 56px; bottom: 34px; display: flex; flex-direction: column; align-items: center; gap: 10px; z-index: 2; }
+  .scroll-cue span { font-size: 10.5px; font-weight: 700; letter-spacing: .22em; color: rgba(255,255,255,.8); writing-mode: vertical-rl; }
+  .scroll-cue i { width: 1.5px; height: 56px; background: rgba(255,255,255,.25); position: relative; overflow: hidden; display: block; }
+  .scroll-cue i::after { content: ""; position: absolute; left: 0; top: -100%; width: 100%; height: 100%; background: var(--dot-gold); animation: cue 1.5s cubic-bezier(.65,0,.35,1) infinite; }
+  @keyframes cue { to { top: 100%; } }
+
+  /* ---- loader (giant counter, dark) ---- */
+  body.is-loading { overflow: hidden; }
+  .loader { position: fixed; inset: 0; z-index: 100; background: var(--dark); display: flex; align-items: center; justify-content: center; clip-path: inset(0); transition: clip-path .75s cubic-bezier(.76,0,.24,1); }
+  .loader.done { clip-path: inset(0 0 100% 0); }
+  .loader-inner { text-align: center; }
+  .loader-wheel { width: 34px; height: 34px; border-radius: 50%; background: conic-gradient(var(--dot-gold) 0deg 90deg, var(--dot-coral) 90deg 180deg, var(--dot-aqua) 180deg 270deg, var(--dot-green) 270deg 360deg); margin: 0 auto 24px; animation: spin 1.4s linear infinite; }
+  .loader-num { font-family: var(--head); font-weight: 900; font-size: clamp(64px, 10vw, 120px); line-height: 1; color: #fff; letter-spacing: -.02em; }
+  .loader-num::after { content: "%"; font-size: .32em; margin-left: 8px; color: rgba(255,255,255,.5); }
+
+  /* ---- marquee (giant, dark) ---- */
+  .marquee { overflow: hidden; white-space: nowrap; padding: 30px 0; background: var(--dark); }
+  .mq-track { display: inline-flex; align-items: center; animation: mq 22s linear infinite; will-change: transform; }
+  .mq-track > span { display: inline-flex; align-items: center; gap: 44px; padding-right: 44px; font-family: var(--head); font-weight: 900; font-size: 44px; line-height: 1.25; color: #fff; letter-spacing: .01em; }
+  .mq-outline { color: transparent; -webkit-text-stroke: 1.5px rgba(255,255,255,.55); letter-spacing: .04em; }
+  .mq-track .mdot { width: 14px; height: 14px; border-radius: 50%; display: inline-block; flex: none; }
+  @keyframes mq { to { transform: translateX(-50%); } }
+
+  /* ---- photo clip reveal ---- */
+  .ph { clip-path: inset(0 100% 0 0); transition: clip-path .9s var(--rv-e); }
+  .ph img { transform: scale(1.12); }
+  .ph.on { clip-path: inset(0); }
+  .ph.on img { transform: none; }
+
+  /* ---- floating CTA ---- */
+  .float-cta { position: fixed; right: 28px; bottom: 96px; z-index: 40; display: flex; flex-direction: column; gap: 3px; padding: 16px 26px; background: var(--dot-gold); color: var(--dark); border-radius: 22px; box-shadow: 0 14px 34px rgba(248,188,1,.35); opacity: 0; transform: translateY(14px); pointer-events: none; transition: opacity .4s ease, transform .4s var(--rv-e), box-shadow .3s ease; }
+  .float-cta.show { opacity: 1; transform: none; pointer-events: auto; }
+  .float-cta:hover { box-shadow: 0 18px 44px rgba(248,188,1,.5); }
+  .float-cta b { font-family: var(--head); font-weight: 900; font-size: 15px; }
+  .float-cta span { font-size: 11.5px; font-weight: 600; color: rgba(28,27,34,.72); }
 
   /* ---- section scaffolding ---- */
   .section { padding: 96px 56px; }
@@ -213,11 +269,13 @@
     body.nav-open .site-nav { transform: none; visibility: visible; transition: transform .4s var(--rv-e), visibility 0s 0s; }
     .site-nav a { font-size: 17px; }
     .nav-toggle { display: block; z-index: 70; }
-    .hero-copy { padding: 44px 20px 0; }
-    .hero-copy h1 { font-size: 36px; }
-    .hero-visual { padding: 0 20px 72px; }
-    .hero-photo { height: 300px; }
-    .dot-cluster { left: 40px; }
+    .hero { padding: 0 20px; min-height: 560px; }
+    .hero h1 { font-size: 38px; }
+    .hero-veil { background: linear-gradient(100deg, rgba(28,27,34,.92) 0%, rgba(28,27,34,.7) 55%, rgba(28,27,34,.3) 100%); }
+    .dot-cluster { right: 20px; bottom: 12%; }
+    .scroll-cue { right: 20px; }
+    .mq-track > span { font-size: 26px; gap: 26px; padding-right: 26px; }
+    .float-cta { right: 16px; bottom: 92px; padding: 13px 20px; }
     .section, .about, .footer { padding-left: 20px; padding-right: 20px; }
     .section { padding-top: 72px; padding-bottom: 72px; }
     .sec-head h2 { font-size: 28px; }
@@ -231,12 +289,27 @@
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .rv, .hero-in { opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important; }
-    .hero-photo img, .badge-wheel, .dot-cluster span { animation: none !important; }
+    .hero-bg img { animation: none !important; transform: none !important; transition: none !important; }
+    .badge-wheel, .dot-cluster span { animation: none !important; }
+    .ch { transform: none !important; transition: none !important; }
+    .ph { clip-path: none !important; transition: none !important; }
+    .ph img { transform: none !important; }
+    .mq-track { animation: none !important; }
+    .loader { display: none !important; }
+    .scroll-cue i::after { animation: none !important; }
+    .float-cta { transition: opacity .2s ease !important; transform: none !important; }
     .progress { display: none; }
   }
 </style>
 </head>
-<body>
+<body class="is-loading">
+
+  <div class="loader" aria-hidden="true">
+    <div class="loader-inner">
+      <div class="loader-wheel"></div>
+      <div class="loader-num">0</div>
+    </div>
+  </div>
 
   <div class="progress"></div>
 
@@ -253,30 +326,36 @@
     </nav>
   </header>
 
-  <section class="hero-copy" id="top">
-    <div class="hero-copy-inner">
-      <div class="hero-badge hero-in" style="animation-delay:.05s">
+  <section class="hero" id="top">
+    <div class="hero-bg"><img src="assets/generated/hero-fullscreen-c.jpeg" alt="クレオスタディ三田教室で学ぶ生徒（イメージ）"></div>
+    <div class="hero-veil"></div>
+    <div class="hero-inner">
+      <div class="hero-badge hero-in" style="animation-delay:.15s">
         <span class="badge-wheel"></span>
         <span style="font-weight:700;font-size:13px;">学習塾 クレオスタディ 三田教室</span>
       </div>
-      <h1 class="hero-in" style="animation-delay:.16s">自ら考える力を、<br>自ら学び続ける力に。</h1>
-      <p class="hero-lead hero-in" style="animation-delay:.28s">クレオスタディだからできる、学びのナビゲート。少人数グループ指導と個別指導、その両方を用意して、お子さま一人ひとりに合った「最適な学び方」をご提案します。</p>
-      <div class="hero-in" style="display:flex;gap:14px;flex-wrap:wrap;animation-delay:.4s">
+      <h1 data-split>自ら考える力を、<br>自ら学び続ける力に。</h1>
+      <p class="hero-lead hero-in" style="animation-delay:.7s">クレオスタディだからできる、学びのナビゲート。少人数グループ指導と個別指導、その両方を用意して、お子さま一人ひとりに合った「最適な学び方」をご提案します。</p>
+      <div class="hero-in" style="display:flex;gap:14px;flex-wrap:wrap;animation-delay:.88s">
         <a class="btn-primary" href="#pt-contact">お問い合わせ</a>
         <a class="btn-outline" href="#pt-flow">無料体験・資料請求</a>
       </div>
     </div>
-  </section>
-
-  <section class="hero-visual hero-in" style="animation-delay:.34s">
-    <div class="hero-photo"><img src="assets/generated/hero-mita-v3.jpeg" alt="クレオスタディ三田教室で学ぶ生徒たち（イメージ）"></div>
     <div class="dot-cluster">
       <span style="background:var(--dot-gold)"></span>
       <span style="background:var(--dot-coral)"></span>
       <span style="background:var(--dot-aqua)"></span>
       <span style="background:var(--dot-green)"></span>
     </div>
+    <div class="scroll-cue"><span>SCROLL</span><i></i></div>
   </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="mq-track">
+      <span>自ら考える力を。<i class="mdot" style="background:var(--dot-gold)"></i><span class="mq-outline">CREO STUDY MITA</span><i class="mdot" style="background:var(--dot-coral)"></i>自ら学び続ける力に。<i class="mdot" style="background:var(--dot-aqua)"></i><span class="mq-outline">MITA / MINATO, TOKYO</span><i class="mdot" style="background:var(--dot-green)"></i></span>
+      <span>自ら考える力を。<i class="mdot" style="background:var(--dot-gold)"></i><span class="mq-outline">CREO STUDY MITA</span><i class="mdot" style="background:var(--dot-coral)"></i>自ら学び続ける力に。<i class="mdot" style="background:var(--dot-aqua)"></i><span class="mq-outline">MITA / MINATO, TOKYO</span><i class="mdot" style="background:var(--dot-green)"></i></span>
+    </div>
+  </div>
 
   <section id="pt-policy" class="section policy">
     <div class="wrap">
@@ -312,7 +391,7 @@
       <p class="course-sub rv">ELEMENTARY ／ 小学生向け講座</p>
       <div class="course-grid3 rv" data-stagger>
         <div class="course-card">
-          <div class="course-photo"><img src="assets/mita-photos/advanced.jpg" alt="アドバンスドプログラムの授業風景"></div>
+          <div class="course-photo ph"><img src="assets/mita-photos/advanced.jpg" alt="アドバンスドプログラムの授業風景"></div>
           <div class="course-bar" style="background:var(--dot-gold)"></div>
           <div class="course-body">
             <span class="tag" style="color:var(--tag-gold);background:var(--pale-gold)">少人数グループ指導</span><span class="course-target">小3〜小6</span>
@@ -321,7 +400,7 @@
           </div>
         </div>
         <div class="course-card">
-          <div class="course-photo"><img src="assets/mita-photos/puzzle.jpg" alt="パズル算数の教材"></div>
+          <div class="course-photo ph"><img src="assets/mita-photos/puzzle.jpg" alt="パズル算数の教材"></div>
           <div class="course-bar" style="background:var(--dot-coral)"></div>
           <div class="course-body">
             <span class="tag" style="color:var(--tag-coral);background:var(--pale-coral)">考える力</span><span class="course-target">小1〜小6</span>
@@ -330,7 +409,7 @@
           </div>
         </div>
         <div class="course-card">
-          <div class="course-photo"><img src="assets/mita-photos/yomitoku.jpg" alt="読みとく国語の教材"></div>
+          <div class="course-photo ph"><img src="assets/mita-photos/yomitoku.jpg" alt="読みとく国語の教材"></div>
           <div class="course-bar" style="background:var(--dot-aqua)"></div>
           <div class="course-body">
             <span class="tag" style="color:var(--tag-aqua);background:var(--pale-aqua)">読解力</span><span class="course-target">小1〜小6</span>
@@ -343,7 +422,7 @@
       <p class="course-sub rv">PERSONAL ／ 個別指導</p>
       <div class="course-grid2 rv" data-stagger>
         <div class="course-card">
-          <div class="course-photo"><img src="assets/mita-photos/private1on1.jpg" alt="個別指導1対1の授業風景"></div>
+          <div class="course-photo ph"><img src="assets/mita-photos/private1on1.jpg" alt="個別指導1対1の授業風景"></div>
           <div class="course-bar" style="background:var(--dot-gold)"></div>
           <div class="course-body">
             <span class="tag" style="color:var(--tag-gold);background:var(--pale-gold)">エキスパート講師</span><span class="course-target">小3〜中3</span>
@@ -352,7 +431,7 @@
           </div>
         </div>
         <div class="course-card">
-          <div class="course-photo"><img src="assets/mita-photos/private1on2.jpg" alt="個別指導1対2の授業風景"></div>
+          <div class="course-photo ph"><img src="assets/mita-photos/private1on2.jpg" alt="個別指導1対2の授業風景"></div>
           <div class="course-bar" style="background:var(--dot-aqua)"></div>
           <div class="course-body">
             <span class="tag" style="color:var(--tag-aqua);background:var(--pale-aqua)">先生1人に、生徒2人</span><span class="course-target">小3〜中3</span>
@@ -374,7 +453,7 @@
       <p class="sec-lead rv">三田教室には、学び方に合わせた3つの空間があります。</p>
       <div class="room-grid rv" data-stagger>
         <div class="room-card">
-          <div class="room-photo"><img src="assets/mita-photos/room-group.jpg" alt="グループ教室の様子"></div>
+          <div class="room-photo ph"><img src="assets/mita-photos/room-group.jpg" alt="グループ教室の様子"></div>
           <div class="room-body" style="background:var(--pale-gold)">
           <div class="room-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="7" cy="8" r="2.6" stroke="#8A6A00" stroke-width="1.6"/><circle cx="17" cy="8" r="2.6" stroke="#8A6A00" stroke-width="1.6"/><path d="M2.5 19c0-3 2-5 4.5-5s4.5 2 4.5 5M12.5 19c0-3 2-5 4.5-5s4.5 2 4.5 5" stroke="#8A6A00" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -384,7 +463,7 @@
           </div>
         </div>
         <div class="room-card">
-          <div class="room-photo"><img src="assets/mita-photos/room-booth.jpg" alt="個別ブースの様子"></div>
+          <div class="room-photo ph"><img src="assets/mita-photos/room-booth.jpg" alt="個別ブースの様子"></div>
           <div class="room-body" style="background:var(--pale-aqua)">
           <div class="room-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="12" rx="2" stroke="#0F6E8F" stroke-width="1.6"/><path d="M12 4v12M3 10h18" stroke="#0F6E8F" stroke-width="1.6"/></svg>
@@ -394,7 +473,7 @@
           </div>
         </div>
         <div class="room-card">
-          <div class="room-photo"><img src="assets/mita-photos/room-selfstudy.jpg" alt="自習室の様子"></div>
+          <div class="room-photo ph"><img src="assets/mita-photos/room-selfstudy.jpg" alt="自習室の様子"></div>
           <div class="room-body" style="background:var(--pale-coral)">
           <div class="room-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 19V7l8-3 8 3v12" stroke="#C0483A" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 19v-6h6v6" stroke="#C0483A" stroke-width="1.6" stroke-linejoin="round"/></svg>
@@ -555,6 +634,7 @@
     </div>
   </footer>
 
+  <a class="float-cta" href="https://www.creo-study.com/contact-trial/" target="_blank" rel="noopener"><b>無料体験 受付中</b><span>お申込みはこちら →</span></a>
   <button class="to-top" aria-label="ページ上部へ戻る">↑</button>
 
 <script>
@@ -564,6 +644,59 @@
   /* motion personality — C: big, snappy rise (values live in CSS :root) */
   var STAGGER = 70;
   var ONCE = true;
+  var LOADER_MS = 1000;
+
+  /* split display headings into masked chars */
+  function splitChars(el) {
+    var idx = 0;
+    function wrapText(node, parent) {
+      var text = node.textContent;
+      var sl = document.createElement('span'); sl.className = 'sl';
+      for (var i = 0; i < text.length; i++) {
+        var ch = document.createElement('span'); ch.className = 'ch';
+        ch.style.setProperty('--i', idx++);
+        ch.textContent = text[i];
+        sl.appendChild(ch);
+      }
+      parent.appendChild(sl);
+    }
+    var nodes = Array.prototype.slice.call(el.childNodes);
+    el.innerHTML = '';
+    nodes.forEach(function (node) {
+      if (node.nodeType === 3) { wrapText(node, el); }
+      else if (node.nodeName === 'BR') { el.appendChild(node); }
+      else { var shell = node.cloneNode(false); wrapText(node, shell); el.appendChild(shell); }
+    });
+    el.classList.add('split');
+  }
+  var heroTitle = document.querySelector('.hero h1[data-split]');
+  var sectionTitles = document.querySelectorAll('.sec-head h2, .about-inner h2');
+  if (!reduced) {
+    if (heroTitle) splitChars(heroTitle);
+    sectionTitles.forEach(splitChars);
+  }
+
+  /* loader: giant counter to 100, then curtain-wipe */
+  var loader = document.querySelector('.loader');
+  var num = document.querySelector('.loader-num');
+  function endLoad() {
+    document.body.classList.remove('is-loading');
+    if (loader) { loader.classList.add('done'); setTimeout(function () { loader.remove(); }, 850); }
+    if (heroTitle) setTimeout(function () { heroTitle.classList.add('on'); }, 180);
+  }
+  if (reduced || !loader) {
+    if (loader) loader.remove();
+    document.body.classList.remove('is-loading');
+    if (heroTitle) heroTitle.classList.add('on');
+  } else {
+    var t0 = null;
+    requestAnimationFrame(function tick(t) {
+      if (t0 === null) t0 = t;
+      var p = Math.min(1, (t - t0) / LOADER_MS);
+      if (num) num.textContent = Math.round(p * 100);
+      if (p < 1) requestAnimationFrame(tick); else setTimeout(endLoad, 100);
+    });
+  }
 
   document.querySelectorAll('[data-stagger]').forEach(function (group) {
     Array.prototype.forEach.call(group.children, function (child, i) {
@@ -572,6 +705,8 @@
     });
   });
 
+  /* reveal observer: .rv rise / .ph clip wipe / split headings */
+  var targets = document.querySelectorAll('.rv, .ph, h2.split');
   if (!reduced && 'IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
@@ -583,20 +718,32 @@
         }
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -7% 0px' });
-    document.querySelectorAll('.rv').forEach(function (el) { io.observe(el); });
+    targets.forEach(function (el) { io.observe(el); });
   } else {
-    document.querySelectorAll('.rv').forEach(function (el) { el.classList.add('on'); });
+    targets.forEach(function (el) { el.classList.add('on'); });
   }
 
+  /* scroll: header state / progress bar / hero parallax / floating CTA */
   var header = document.querySelector('.site-header');
   var toTop = document.querySelector('.to-top');
   var progress = document.querySelector('.progress');
-  window.addEventListener('scroll', function () {
-    header.classList.toggle('scrolled', window.scrollY > 24);
-    toTop.classList.toggle('show', window.scrollY > 600);
+  var floatCta = document.querySelector('.float-cta');
+  var heroBg = document.querySelector('.hero-bg');
+  var ticking = false;
+  function onScroll() {
+    var sy = window.scrollY;
+    header.classList.toggle('scrolled', sy > 24);
+    toTop.classList.toggle('show', sy > 600);
+    if (floatCta) floatCta.classList.toggle('show', sy > window.innerHeight * 0.7);
+    if (heroBg && !reduced && sy < window.innerHeight * 1.2) heroBg.style.transform = 'translateY(' + sy * 0.4 + 'px)';
     var max = document.documentElement.scrollHeight - window.innerHeight;
-    progress.style.transform = 'scaleX(' + (max > 0 ? window.scrollY / max : 0) + ')';
+    progress.style.transform = 'scaleX(' + (max > 0 ? sy / max : 0) + ')';
+    ticking = false;
+  }
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
   }, { passive: true });
+  onScroll();
 
   toTop.addEventListener('click', function () {
     window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
