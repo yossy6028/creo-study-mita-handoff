@@ -120,14 +120,21 @@
   .course-card { border-radius: 28px; overflow: hidden; border: 1.5px solid var(--line); background: #fff; transition: transform .35s var(--rv-e), box-shadow .35s var(--rv-e); }
   .course-card:hover { transform: translateY(-6px); box-shadow: 0 20px 44px rgba(28,27,34,.1); }
   .course-bar { height: 8px; }
+  .course-photo { width: 100%; aspect-ratio: 4/3; overflow: hidden; }
+  .course-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s var(--rv-e); }
+  .course-card:hover .course-photo img { transform: scale(1.06); }
   .course-body { padding: 32px 28px; }
   .course-target { display: inline-block; font-weight: 700; font-size: 11.5px; color: var(--sub); border: 1.5px solid var(--line); padding: 4px 12px; border-radius: 100px; margin: 0 0 14px 8px; }
   .course-note { font-size: 12.5px; color: var(--faint); margin: 30px 0 0; }
 
   /* ---- rooms ---- */
   .room-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-  .room-card { border-radius: 28px; padding: 38px 32px; transition: transform .35s var(--rv-e); }
+  .room-card { border-radius: 28px; padding: 0; overflow: hidden; transition: transform .35s var(--rv-e); }
   .room-card:hover { transform: translateY(-6px); }
+  .room-photo { width: 100%; aspect-ratio: 4/3; overflow: hidden; }
+  .room-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s var(--rv-e); }
+  .room-card:hover .room-photo img { transform: scale(1.06); }
+  .room-body { padding: 32px 32px 38px; }
   .room-icon { width: 52px; height: 52px; border-radius: 16px; background: #fff; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
 
   /* ---- message ---- */
@@ -305,6 +312,7 @@
       <p class="course-sub rv">ELEMENTARY ／ 小学生向け講座</p>
       <div class="course-grid3 rv" data-stagger>
         <div class="course-card">
+          <div class="course-photo"><img src="assets/mita-photos/advanced.jpg" alt="アドバンスドプログラムの授業風景"></div>
           <div class="course-bar" style="background:var(--dot-gold)"></div>
           <div class="course-body">
             <span class="tag" style="color:var(--tag-gold);background:var(--pale-gold)">少人数グループ指導</span><span class="course-target">小3〜小6</span>
@@ -313,6 +321,7 @@
           </div>
         </div>
         <div class="course-card">
+          <div class="course-photo"><img src="assets/mita-photos/puzzle.jpg" alt="パズル算数の教材"></div>
           <div class="course-bar" style="background:var(--dot-coral)"></div>
           <div class="course-body">
             <span class="tag" style="color:var(--tag-coral);background:var(--pale-coral)">考える力</span><span class="course-target">小1〜小6</span>
@@ -321,6 +330,7 @@
           </div>
         </div>
         <div class="course-card">
+          <div class="course-photo"><img src="assets/mita-photos/yomitoku.jpg" alt="読みとく国語の教材"></div>
           <div class="course-bar" style="background:var(--dot-aqua)"></div>
           <div class="course-body">
             <span class="tag" style="color:var(--tag-aqua);background:var(--pale-aqua)">読解力</span><span class="course-target">小1〜小6</span>
@@ -333,6 +343,7 @@
       <p class="course-sub rv">PERSONAL ／ 個別指導</p>
       <div class="course-grid2 rv" data-stagger>
         <div class="course-card">
+          <div class="course-photo"><img src="assets/mita-photos/private1on1.jpg" alt="個別指導1対1の授業風景"></div>
           <div class="course-bar" style="background:var(--dot-gold)"></div>
           <div class="course-body">
             <span class="tag" style="color:var(--tag-gold);background:var(--pale-gold)">エキスパート講師</span><span class="course-target">小3〜中3</span>
@@ -341,6 +352,7 @@
           </div>
         </div>
         <div class="course-card">
+          <div class="course-photo"><img src="assets/mita-photos/private1on2.jpg" alt="個別指導1対2の授業風景"></div>
           <div class="course-bar" style="background:var(--dot-aqua)"></div>
           <div class="course-body">
             <span class="tag" style="color:var(--tag-aqua);background:var(--pale-aqua)">先生1人に、生徒2人</span><span class="course-target">小3〜中3</span>
@@ -361,26 +373,35 @@
       </div>
       <p class="sec-lead rv">三田教室には、学び方に合わせた3つの空間があります。</p>
       <div class="room-grid rv" data-stagger>
-        <div class="room-card" style="background:var(--pale-gold)">
+        <div class="room-card">
+          <div class="room-photo"><img src="assets/mita-photos/room-group.jpg" alt="グループ教室の様子"></div>
+          <div class="room-body" style="background:var(--pale-gold)">
           <div class="room-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="7" cy="8" r="2.6" stroke="#8A6A00" stroke-width="1.6"/><circle cx="17" cy="8" r="2.6" stroke="#8A6A00" stroke-width="1.6"/><path d="M2.5 19c0-3 2-5 4.5-5s4.5 2 4.5 5M12.5 19c0-3 2-5 4.5-5s4.5 2 4.5 5" stroke="#8A6A00" stroke-width="1.6" stroke-linecap="round"/></svg>
           </div>
           <h3 class="item" style="margin-bottom:12px;font-size:18px">グループ教室</h3>
           <p class="body-sm" style="color:var(--sub)">少人数グループ指導のための教室。先生の目が一人ひとりに届く、ほどよい距離感です。</p>
+          </div>
         </div>
-        <div class="room-card" style="background:var(--pale-aqua)">
+        <div class="room-card">
+          <div class="room-photo"><img src="assets/mita-photos/room-booth.jpg" alt="個別ブースの様子"></div>
+          <div class="room-body" style="background:var(--pale-aqua)">
           <div class="room-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="12" rx="2" stroke="#0F6E8F" stroke-width="1.6"/><path d="M12 4v12M3 10h18" stroke="#0F6E8F" stroke-width="1.6"/></svg>
           </div>
           <h3 class="item" style="margin-bottom:12px;font-size:18px">個別ブース</h3>
           <p class="body-sm" style="color:var(--sub)">1対1・1対2の個別指導専用のブース席。まわりを気にせず、先生とじっくり向き合えます。</p>
+          </div>
         </div>
-        <div class="room-card" style="background:var(--pale-coral)">
+        <div class="room-card">
+          <div class="room-photo"><img src="assets/mita-photos/room-selfstudy.jpg" alt="自習室の様子"></div>
+          <div class="room-body" style="background:var(--pale-coral)">
           <div class="room-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 19V7l8-3 8 3v12" stroke="#C0483A" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 19v-6h6v6" stroke="#C0483A" stroke-width="1.6" stroke-linejoin="round"/></svg>
           </div>
           <h3 class="item" style="margin-bottom:12px;font-size:18px">自習室完備</h3>
           <p class="body-sm" style="color:var(--sub)">授業の前後にも使える自習スペースを完備。集中して学習に取り組めます。</p>
+          </div>
         </div>
       </div>
     </div>
@@ -397,7 +418,7 @@
         <p class="message-body">現在は、私立中学受験・都立中高一貫校受検を予定している生徒さんに多く通っていただいています。低学年では「パズル算数」と「読みとく国語」で、中学受験に求められる高い思考力と深い読解力を育てています。また中学生では、私立中学に通う生徒さんが個別指導で学習しています。ぜひお気軽にお問い合わせください。</p>
         <div class="message-sign">
           <span class="message-role">クレオスタディ三田 教室責任者</span>
-          <span class="message-name">伊藤 友二</span>
+          <span class="message-name">○○○○</span>
         </div>
         <p class="message-note">※ 他塾との併用生も受け付けております。</p>
       </div>
