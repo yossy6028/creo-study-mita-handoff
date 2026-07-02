@@ -3,158 +3,590 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="学習塾クレオスタディ三田教室。少人数グループ指導と個別指導で、小学1年生から中学3年生まで、一人ひとりに合った学び方をご提案します。">
 <title>クレオスタディ三田教室 — C 個性が、かたちになる</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Zen+Kaku+Gothic+New:wght@900&display=swap">
-  <style>
-    body { margin:0; -webkit-font-smoothing:antialiased; }
-    * { box-sizing:border-box; }
-    a { text-decoration:none; color:inherit; }
-    image-slot { display:block !important; width:100% !important; height:100% !important; }
-  </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Zen+Kaku+Gothic+New:wght@900&display=swap">
+<style>
+  :root {
+    --bg: #FFFFFF;
+    --band: #FBF8F3;
+    --dark: #1C1B22;
+    --ink: #1C1B22;
+    --sub: #4A4950;
+    --faint: #6B6A72;
+    --line: #EEEBE4;
+    --dot-gold: #F8BC01;
+    --dot-coral: #F59084;
+    --dot-aqua: #47BEE7;
+    --dot-green: #7CC628;
+    --tag-gold: #8A6A00;
+    --tag-coral: #C0483A;
+    --tag-aqua: #0F6E8F;
+    --pale-gold: #FEF3D6;
+    --pale-coral: #FCEAE7;
+    --pale-aqua: #EAF7FC;
+    --head: 'Zen Kaku Gothic New', sans-serif;
+    --sans: 'Noto Sans JP', sans-serif;
+    /* motion personality — C: big, snappy rise */
+    --rv-y: 36px;
+    --rv-t: .6s;
+    --rv-e: cubic-bezier(.16, 1, .3, 1);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; overflow-x: clip; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+  a { text-decoration: none; color: inherit; }
+  img { display: block; }
+  section, footer { scroll-margin-top: 96px; }
+
+  /* ---- scroll progress ---- */
+  .progress { position: fixed; top: 0; left: 0; height: 4px; width: 100%; z-index: 60; transform-origin: left; transform: scaleX(0); background: linear-gradient(90deg, var(--dot-gold), var(--dot-coral), var(--dot-aqua), var(--dot-green)); }
+
+  /* ---- reveal on scroll ---- */
+  .rv { opacity: 0; transform: translateY(var(--rv-y)); transition: opacity var(--rv-t) var(--rv-e), transform var(--rv-t) var(--rv-e); }
+  .rv.on { opacity: 1; transform: none; }
+
+  /* ---- header ---- */
+  .site-header { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; padding: 20px 56px; background: rgba(255,255,255,.88); transition: padding .35s ease, box-shadow .35s ease; }
+  /* backdrop-filter は fixed 子要素（モバイルナビ）の包含ブロックを作るため、疑似要素側に置く */
+  .site-header::before { content: ""; position: absolute; inset: 0; z-index: -1; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  .site-header.scrolled { padding: 10px 56px; box-shadow: 0 8px 30px rgba(28,27,34,.08); }
+  .site-header .logo { height: 66px; width: auto; transition: height .35s ease; }
+  .site-header.scrolled .logo { height: 48px; }
+  .site-nav { display: flex; align-items: center; gap: 6px; }
+  .site-nav a { font: 600 14px/1 var(--sans); padding: 10px 16px; border-radius: 100px; transition: background .3s ease; }
+  .site-nav a:hover { background: var(--band); }
+  .site-nav a.nav-cta { font-weight: 700; color: #fff; background: var(--dark); padding: 11px 22px; margin-left: 6px; transition: transform .3s ease, box-shadow .3s ease; }
+  .site-nav a.nav-cta:hover { background: var(--dark); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(28,27,34,.24); }
+  .nav-toggle { display: none; background: #fff; border: 1.5px solid var(--dark); border-radius: 100px; width: 44px; height: 44px; cursor: pointer; position: relative; }
+  .nav-toggle span { position: absolute; left: 13px; right: 13px; height: 2px; border-radius: 2px; background: var(--dark); transition: transform .3s ease, opacity .3s ease; }
+  .nav-toggle span:nth-child(1) { top: 16px; }
+  .nav-toggle span:nth-child(2) { top: 21px; }
+  .nav-toggle span:nth-child(3) { top: 26px; }
+  body.nav-open .nav-toggle span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
+  body.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
+  body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
+
+  /* ---- hero ---- */
+  .hero-copy { padding: 64px 56px 0; max-width: 1232px; margin: 0 auto; }
+  .hero-copy-inner { max-width: 760px; margin: 0 0 52px; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 9px; padding: 7px 16px 7px 8px; border: 1.5px solid var(--dark); border-radius: 100px; margin-bottom: 32px; }
+  .badge-wheel { width: 20px; height: 20px; border-radius: 50%; background: conic-gradient(var(--dot-gold) 0deg 90deg, var(--dot-coral) 90deg 180deg, var(--dot-aqua) 180deg 270deg, var(--dot-green) 270deg 360deg); display: inline-block; animation: spin 14s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .hero-copy h1 { font-family: var(--head); font-weight: 900; font-size: 58px; line-height: 1.35; margin: 0 0 30px; letter-spacing: -.02em; }
+  .hero-lead { font-size: 16.5px; line-height: 1.95; color: var(--sub); max-width: 560px; margin: 0 0 40px; }
+  .btn-primary { display: inline-block; font-weight: 700; font-size: 15px; padding: 18px 34px; background: var(--dark); color: #fff; border-radius: 100px; transition: transform .3s ease, box-shadow .3s ease; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(28,27,34,.26); }
+  .btn-outline { display: inline-block; font-weight: 600; font-size: 15px; padding: 16.5px 26px; border: 1.5px solid var(--dark); border-radius: 100px; transition: background .3s ease, color .3s ease; }
+  .btn-outline:hover { background: var(--dark); color: #fff; }
+  .hero-visual { padding: 0 56px 100px; position: relative; max-width: 1232px; margin: 0 auto; }
+  .hero-photo { width: 100%; height: 440px; border-radius: 32px; overflow: hidden; }
+  .hero-photo img { width: 100%; height: 100%; object-fit: cover; animation: kenburns 16s ease-in-out infinite alternate; }
+  @keyframes kenburns { from { transform: scale(1); } to { transform: scale(1.07); } }
+  .dot-cluster { position: absolute; top: 24px; left: 80px; display: grid; grid-template-columns: repeat(4, 14px); gap: 8px; }
+  .dot-cluster span { width: 14px; height: 14px; border-radius: 50%; display: block; animation: pulse 2.8s ease-in-out infinite; }
+  .dot-cluster span:nth-child(2) { animation-delay: .35s; }
+  .dot-cluster span:nth-child(3) { animation-delay: .7s; }
+  .dot-cluster span:nth-child(4) { animation-delay: 1.05s; }
+  @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.35); } }
+  .hero-in { opacity: 0; transform: translateY(30px); animation: heroIn .8s var(--rv-e) forwards; }
+  @keyframes heroIn { to { opacity: 1; transform: none; } }
+
+  /* ---- section scaffolding ---- */
+  .section { padding: 96px 56px; }
+  .wrap { max-width: 1120px; margin: 0 auto; }
+  .sec-head { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px; margin-bottom: 28px; }
+  .sec-head h2 { font-family: var(--head); font-weight: 900; font-size: 38px; line-height: 1.4; margin: 0; max-width: 640px; }
+  .sec-label { font: 700 13px/1 var(--sans); letter-spacing: .1em; }
+  .sec-lead { font-size: 15.5px; line-height: 2; color: var(--sub); max-width: 680px; margin: 0 0 56px; }
+  h3.item { font-weight: 700; font-size: 19px; margin: 0 0 12px; }
+  .body-sm { font-size: 14px; line-height: 1.9; color: var(--faint); margin: 0; }
+  .tag { display: inline-block; font-weight: 700; font-size: 12px; padding: 5px 12px; border-radius: 100px; margin-bottom: 16px; }
+
+  /* ---- policy (dark) ---- */
+  .policy { background: var(--dark); color: #fff; }
+  .policy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .policy-panel { border-radius: 28px; padding: 42px 38px; transition: transform .35s var(--rv-e); }
+  .policy-panel:hover { transform: translateY(-6px); }
+  .policy-num { font-family: var(--head); font-weight: 900; font-size: 15px; margin-bottom: 18px; }
+  .policy-note { text-align: center; font-size: 13.5px; color: rgba(255,255,255,.5); margin: 52px 0 0; }
+
+  /* ---- courses ---- */
+  .course-sub { font: 700 13px/1 var(--sans); color: var(--faint); letter-spacing: .1em; margin: 0 0 22px; }
+  .course-grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-bottom: 48px; }
+  .course-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  .course-card { border-radius: 28px; overflow: hidden; border: 1.5px solid var(--line); background: #fff; transition: transform .35s var(--rv-e), box-shadow .35s var(--rv-e); }
+  .course-card:hover { transform: translateY(-6px); box-shadow: 0 20px 44px rgba(28,27,34,.1); }
+  .course-bar { height: 8px; }
+  .course-body { padding: 32px 28px; }
+  .course-target { display: inline-block; font-weight: 700; font-size: 11.5px; color: var(--sub); border: 1.5px solid var(--line); padding: 4px 12px; border-radius: 100px; margin: 0 0 14px 8px; }
+  .course-note { font-size: 12.5px; color: var(--faint); margin: 30px 0 0; }
+
+  /* ---- rooms ---- */
+  .room-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .room-card { border-radius: 28px; padding: 38px 32px; transition: transform .35s var(--rv-e); }
+  .room-card:hover { transform: translateY(-6px); }
+  .room-icon { width: 52px; height: 52px; border-radius: 16px; background: #fff; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+
+  /* ---- message ---- */
+  .message-card { border: 1.5px solid var(--dark); border-radius: 32px; padding: 52px 56px; position: relative; background: #fff; }
+  .message-quote { position: absolute; top: -26px; left: 44px; width: 52px; height: 52px; border-radius: 50%; background: conic-gradient(var(--dot-gold) 0deg 90deg, var(--dot-coral) 90deg 180deg, var(--dot-aqua) 180deg 270deg, var(--dot-green) 270deg 360deg); display: flex; align-items: center; justify-content: center; }
+  .message-quote i { width: 40px; height: 40px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; font-style: normal; font-family: var(--head); font-weight: 900; font-size: 22px; }
+  .message-body { font-size: 15px; line-height: 2.1; color: var(--sub); margin: 0 0 28px; }
+  .message-sign { display: flex; align-items: baseline; gap: 16px; border-top: 1.5px solid var(--line); padding-top: 22px; }
+  .message-role { font-size: 12px; color: var(--faint); font-weight: 600; }
+  .message-name { font-family: var(--head); font-weight: 900; font-size: 21px; }
+  .message-note { font-size: 12.5px; color: var(--faint); margin: 12px 0 0; }
+
+  /* ---- about ---- */
+  .about { padding: 104px 56px; background: var(--band); }
+  .about-inner { max-width: 800px; margin: 0 auto; text-align: center; }
+  .about h2 { font-family: var(--head); font-weight: 900; font-size: 32px; line-height: 1.55; margin: 0 0 42px; }
+  .about p.para { text-align: left; font-size: 15.5px; line-height: 2.05; color: var(--sub); margin: 0; }
+  .about-close { margin-top: 38px; font-weight: 700; font-size: 15px; line-height: 1.9; }
+
+  /* ---- flow ---- */
+  .flow-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .flow-card { border: 1.5px solid var(--line); border-radius: 28px; padding: 38px 32px; transition: transform .35s var(--rv-e), border-color .35s ease; }
+  .flow-card:hover { transform: translateY(-6px); border-color: var(--dark); }
+  .flow-num { font-family: var(--head); font-weight: 900; font-size: 44px; line-height: 1; margin-bottom: 18px; }
+
+  /* ---- topics ---- */
+  .topics-list { display: flex; flex-direction: column; gap: 14px; max-width: 860px; }
+  .topics-list a { display: grid; grid-template-columns: auto 1fr auto; gap: 24px; align-items: center; border: 1.5px solid var(--line); border-radius: 100px; padding: 18px 32px; background: #fff; transition: transform .3s var(--rv-e), border-color .3s ease; }
+  .topics-list a:hover { transform: translateX(8px); border-color: var(--dark); }
+  .topics-date { font-family: var(--head); font-weight: 900; font-size: 13px; letter-spacing: .05em; }
+  .topics-title { font-size: 14.5px; font-weight: 600; }
+  .topics-arrow { font-weight: 700; color: var(--faint); transition: transform .3s ease, color .3s ease; }
+  .topics-list a:hover .topics-arrow { transform: translateX(5px); color: var(--ink); }
+  .topics-more { display: inline-block; margin-top: 28px; font-weight: 700; font-size: 14px; border-bottom: 2px solid var(--dark); padding-bottom: 3px; }
+
+  /* ---- access ---- */
+  .access-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 32px; align-items: stretch; }
+  .access-card { border: 1.5px solid var(--line); border-radius: 28px; padding: 38px 40px; background: #fff; }
+  .access-card > div { display: grid; grid-template-columns: 84px 1fr; gap: 18px; padding: 16px 0; border-bottom: 1.5px solid var(--line); }
+  .access-card > div:last-child { border-bottom: none; }
+  .access-dt { font: 700 12.5px/1.6 var(--sans); letter-spacing: .08em; padding-top: 3px; }
+  .access-dd { font-size: 14px; line-height: 1.95; color: var(--sub); }
+  .station { display: flex; justify-content: space-between; gap: 12px; }
+  .station b { font-weight: 700; color: var(--ink); white-space: nowrap; }
+  .access-map { border-radius: 28px; overflow: hidden; border: 1.5px solid var(--line); min-height: 380px; }
+  .access-map iframe { width: 100%; height: 100%; min-height: 380px; border: 0; display: block; }
+
+  /* ---- footer (dark) ---- */
+  .footer { padding: 92px 56px 44px; background: var(--dark); color: #fff; }
+  .footer-cta { text-align: center; margin-bottom: 60px; }
+  .footer-cta h2 { font-family: var(--head); font-weight: 900; font-size: 30px; margin: 0 0 22px; }
+  .footer-cta p { font-size: 15px; line-height: 1.9; color: rgba(255,255,255,.68); margin: 0 0 38px; }
+  .footer-cta .row { display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap; }
+  .btn-gold { display: inline-block; font-weight: 700; font-size: 15px; padding: 17px 38px; background: var(--dot-gold); color: var(--dark); border-radius: 100px; transition: transform .3s ease, box-shadow .3s ease; }
+  .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(248,188,1,.3); }
+  .btn-dark-outline { display: inline-block; font-weight: 600; font-size: 15px; padding: 17px 28px; color: #fff; border: 1.5px solid rgba(255,255,255,.4); border-radius: 100px; transition: border-color .3s ease, background .3s ease; }
+  .btn-dark-outline:hover { border-color: #fff; background: rgba(255,255,255,.08); }
+  .footer-info { border-top: 1px solid rgba(255,255,255,.15); border-bottom: 1px solid rgba(255,255,255,.15); padding: 32px 0; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px; }
+  .footer-info h4 { font-weight: 700; font-size: 15px; margin: 0 0 10px; }
+  .footer-info .detail { font-size: 12.5px; color: rgba(255,255,255,.55); line-height: 1.9; }
+  .sister-link { font-weight: 600; font-size: 13px; color: var(--dot-gold); border-bottom: 1px solid var(--dot-gold); padding-bottom: 2px; white-space: nowrap; transition: opacity .3s ease; }
+  .sister-link:hover { opacity: .6; }
+  .footer-bar { display: flex; justify-content: space-between; align-items: center; margin-top: 36px; padding-top: 26px; }
+  .footer-bar img { height: 22px; opacity: .9; }
+  .footer-bar span { font-size: 12px; color: rgba(255,255,255,.4); }
+
+  /* ---- back to top ---- */
+  .to-top { position: fixed; right: 28px; bottom: 28px; width: 50px; height: 50px; border: none; border-radius: 50%; background: var(--dark); color: #fff; font-size: 16px; font-weight: 700; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: opacity .4s ease, transform .3s ease; box-shadow: 0 10px 26px rgba(28,27,34,.24); z-index: 40; }
+  .to-top.show { opacity: 1; pointer-events: auto; }
+  .to-top:hover { transform: translateY(-3px); }
+
+  /* ---- responsive ---- */
+  @media (max-width: 960px) {
+    .site-header, .site-header.scrolled { padding-left: 20px; padding-right: 20px; }
+    .site-nav { position: fixed; inset: 0; background: #fff; flex-direction: column; justify-content: center; gap: 22px; transform: translateX(100%); visibility: hidden; transition: transform .4s var(--rv-e), visibility 0s .4s; z-index: 60; }
+    body.nav-open .site-nav { transform: none; visibility: visible; transition: transform .4s var(--rv-e), visibility 0s 0s; }
+    .site-nav a { font-size: 17px; }
+    .nav-toggle { display: block; z-index: 70; }
+    .hero-copy { padding: 44px 20px 0; }
+    .hero-copy h1 { font-size: 36px; }
+    .hero-visual { padding: 0 20px 72px; }
+    .hero-photo { height: 300px; }
+    .dot-cluster { left: 40px; }
+    .section, .about, .footer { padding-left: 20px; padding-right: 20px; }
+    .section { padding-top: 72px; padding-bottom: 72px; }
+    .sec-head h2 { font-size: 28px; }
+    .policy-grid, .course-grid3, .course-grid2, .room-grid, .flow-grid { grid-template-columns: 1fr; }
+    .access-grid { grid-template-columns: 1fr; }
+    .message-card { padding: 44px 26px; }
+    .topics-list a { grid-template-columns: auto 1fr; border-radius: 24px; padding: 16px 22px; }
+    .topics-arrow { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .rv, .hero-in { opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important; }
+    .hero-photo img, .badge-wheel, .dot-cluster span { animation: none !important; }
+    .progress { display: none; }
+  }
+</style>
 </head>
 <body>
-<div style="width:100%;background:#FFFFFF;color:#1C1B22;">
 
-  <header style="display:flex;align-items:center;justify-content:space-between;padding:24px 56px;">
-    <img src="assets/creo-logo-mark.png" alt="Creo Study" style="height:72px;width:auto;display:block;">
-    <nav style="display:flex;align-items:center;gap:6px;">
-      <a href="#pt-policy" style="font-family:'Noto Sans JP',sans-serif;font-weight:600;font-size:14px;color:#1C1B22;padding:10px 16px;border-radius:100px;">指導方針</a>
-      <a href="#pt-programs" style="font-family:'Noto Sans JP',sans-serif;font-weight:600;font-size:14px;color:#1C1B22;padding:10px 16px;border-radius:100px;">特色講座</a>
-      <a href="#pt-about" style="font-family:'Noto Sans JP',sans-serif;font-weight:600;font-size:14px;color:#1C1B22;padding:10px 16px;border-radius:100px;">クレオスタディについて</a>
-      <a href="#pt-contact" style="font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:14px;color:#fff;background:#1C1B22;padding:11px 22px;border-radius:100px;margin-left:6px;">お問い合わせ</a>
+  <div class="progress"></div>
+
+  <header class="site-header">
+    <a href="#top"><img class="logo" src="assets/creo-logo-mark.png" alt="Creo Study"></a>
+    <button class="nav-toggle" aria-label="メニュー"><span></span><span></span><span></span></button>
+    <nav class="site-nav">
+      <a href="#pt-policy">指導方針</a>
+      <a href="#pt-programs">コース紹介</a>
+      <a href="#pt-room">教室環境</a>
+      <a href="#pt-about">クレオスタディについて</a>
+      <a href="#pt-access">アクセス</a>
+      <a class="nav-cta" href="#pt-contact">お問い合わせ</a>
     </nav>
   </header>
 
-  <section style="padding:64px 56px 0;">
-    <div style="max-width:760px;margin:0 0 52px;">
-      <div style="display:inline-flex;align-items:center;gap:9px;padding:7px 16px 7px 8px;border:1.5px solid #1C1B22;border-radius:100px;margin-bottom:32px;">
-        <span style="width:20px;height:20px;border-radius:50%;background:conic-gradient(#F8BC01 0deg 90deg,#F59084 90deg 180deg,#47BEE7 180deg 270deg,#7CC628 270deg 360deg);display:inline-block;"></span>
-        <span style="font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:13px;color:#1C1B22;">学習塾 クレオスタディ 三田教室</span>
+  <section class="hero-copy" id="top">
+    <div class="hero-copy-inner">
+      <div class="hero-badge hero-in" style="animation-delay:.05s">
+        <span class="badge-wheel"></span>
+        <span style="font-weight:700;font-size:13px;">学習塾 クレオスタディ 三田教室</span>
       </div>
-      <h1 style="font-family:'Zen Kaku Gothic New',sans-serif;font-weight:900;font-size:58px;line-height:1.35;color:#1C1B22;margin:0 0 30px;letter-spacing:-.02em;">
-        自ら考える力を、<br>自ら学び続ける力に。
-      </h1>
-      <p style="font-family:'Noto Sans JP',sans-serif;font-size:16.5px;line-height:1.95;color:#4A4950;max-width:560px;margin:0 0 40px;">
-        クレオスタディだからできる、学びのナビゲート。少人数グループ指導と個別指導、その両方を用意して、お子さま一人ひとりに合った「最適な学び方」をご提案します。
-      </p>
-      <div style="display:flex;gap:14px;">
-        <a href="#pt-contact" style="font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:15px;padding:18px 34px;background:#1C1B22;color:#fff;border-radius:100px;">お問い合わせ</a>
-        <a href="#pt-contact" style="font-family:'Noto Sans JP',sans-serif;font-weight:600;font-size:15px;padding:16.5px 26px;color:#1C1B22;border:1.5px solid #1C1B22;border-radius:100px;">無料体験・資料請求</a>
+      <h1 class="hero-in" style="animation-delay:.16s">自ら考える力を、<br>自ら学び続ける力に。</h1>
+      <p class="hero-lead hero-in" style="animation-delay:.28s">クレオスタディだからできる、学びのナビゲート。少人数グループ指導と個別指導、その両方を用意して、お子さま一人ひとりに合った「最適な学び方」をご提案します。</p>
+      <div class="hero-in" style="display:flex;gap:14px;flex-wrap:wrap;animation-delay:.4s">
+        <a class="btn-primary" href="#pt-contact">お問い合わせ</a>
+        <a class="btn-outline" href="#pt-flow">無料体験・資料請求</a>
       </div>
     </div>
   </section>
 
-  <section style="padding:0 56px 100px;position:relative;">
-    <div style="width:100%;height:440px;border-radius:32px;overflow:hidden;"><img src="assets/generated/hero-mita-v3.jpeg" alt="クレオスタディ三田教室で学ぶ生徒たち（イメージ）" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
-    <div style="position:absolute;top:24px;left:24px;display:grid;grid-template-columns:repeat(4,14px);gap:8px;">
-      <span style="width:14px;height:14px;border-radius:50%;background:#F8BC01;display:block;"></span>
-      <span style="width:14px;height:14px;border-radius:50%;background:#F59084;display:block;"></span>
-      <span style="width:14px;height:14px;border-radius:50%;background:#47BEE7;display:block;"></span>
-      <span style="width:14px;height:14px;border-radius:50%;background:#7CC628;display:block;"></span>
+  <section class="hero-visual hero-in" style="animation-delay:.34s">
+    <div class="hero-photo"><img src="assets/generated/hero-mita-v3.jpeg" alt="クレオスタディ三田教室で学ぶ生徒たち（イメージ）"></div>
+    <div class="dot-cluster">
+      <span style="background:var(--dot-gold)"></span>
+      <span style="background:var(--dot-coral)"></span>
+      <span style="background:var(--dot-aqua)"></span>
+      <span style="background:var(--dot-green)"></span>
     </div>
   </section>
 
-  <section id="pt-policy" style="padding:96px 56px;background:#1C1B22;color:#fff;">
-    <div style="max-width:1120px;margin:0 auto;">
-      <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;margin-bottom:60px;">
-        <h2 style="font-family:'Zen Kaku Gothic New',sans-serif;font-weight:900;font-size:38px;line-height:1.4;margin:0;max-width:640px;">少人数グループ指導、<br>そして個別指導。</h2>
-        <div style="font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:13px;color:#F8BC01;letter-spacing:.1em;">POLICY ／ 指導方針</div>
+  <section id="pt-policy" class="section policy">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <h2>少人数グループ指導、<br>そして個別指導。</h2>
+        <div class="sec-label" style="color:var(--dot-gold)">POLICY ／ 指導方針</div>
       </div>
-      <p style="font-family:'Noto Sans JP',sans-serif;font-size:15.5px;line-height:2;color:rgba(255,255,255,.72);max-width:680px;margin:0 0 60px;">得意なことも、苦手なことも、ちょうどいいペースも、お子さまによって違います。だからこそクレオスタディは、二つの学び方をご用意しています。</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
-        <div style="background:rgba(248,188,1,.12);border:1.5px solid rgba(248,188,1,.4);border-radius:28px;padding:42px 38px;">
-          <div style="font-family:'Zen Kaku Gothic New',sans-serif;font-weight:900;font-size:15px;color:#F8BC01;margin-bottom:18px;">01</div>
-          <h3 style="font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:20px;color:#fff;margin:0 0 14px;">少人数グループ指導</h3>
-          <p style="font-family:'Noto Sans JP',sans-serif;font-size:14px;line-height:1.95;color:rgba(255,255,255,.7);margin:0;">少人数だからこそ、先生の目が一人ひとりに行き届きます。良きライバルと励まし合いながら、学ぶ楽しさと粘り強さを育みます。</p>
+      <p class="sec-lead rv" style="color:rgba(255,255,255,.72)">得意なことも、苦手なことも、ちょうどいいペースも、お子さまによって違います。だからこそクレオスタディは、二つの学び方をご用意しています。</p>
+      <div class="policy-grid rv" data-stagger>
+        <div class="policy-panel" style="background:rgba(248,188,1,.12);border:1.5px solid rgba(248,188,1,.4)">
+          <div class="policy-num" style="color:var(--dot-gold)">01</div>
+          <h3 class="item" style="color:#fff;margin-bottom:14px;font-size:20px">少人数グループ指導</h3>
+          <p class="body-sm" style="color:rgba(255,255,255,.7)">少人数だからこそ、先生の目が一人ひとりに行き届きます。良きライバルと励まし合いながら、学ぶ楽しさと粘り強さを育みます。</p>
         </div>
-        <div style="background:rgba(71,190,231,.12);border:1.5px solid rgba(71,190,231,.4);border-radius:28px;padding:42px 38px;">
-          <div style="font-family:'Zen Kaku Gothic New',sans-serif;font-weight:900;font-size:15px;color:#47BEE7;margin-bottom:18px;">02</div>
-          <h3 style="font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:20px;color:#fff;margin:0 0 14px;">個別指導</h3>
-          <p style="font-family:'Noto Sans JP',sans-serif;font-size:14px;line-height:1.95;color:rgba(255,255,255,.7);margin:0;">先生とじっくり向き合う、1対1・1対2の個別指導。わかるまで、できるまで。お子さまのペースでカリキュラムを組み立てます。</p>
+        <div class="policy-panel" style="background:rgba(71,190,231,.12);border:1.5px solid rgba(71,190,231,.4)">
+          <div class="policy-num" style="color:var(--dot-aqua)">02</div>
+          <h3 class="item" style="color:#fff;margin-bottom:14px;font-size:20px">個別指導</h3>
+          <p class="body-sm" style="color:rgba(255,255,255,.7)">先生とじっくり向き合う、1対1・1対2の個別指導。わかるまで、できるまで。お子さまのペースでカリキュラムを組み立てます。</p>
         </div>
       </div>
-      <p style="text-align:center;font-family:'Noto Sans JP',sans-serif;font-size:13.5px;color:rgba(255,255,255,.5);margin:52px 0 0;">小学1年生から中学3年生まで。日々の学習から中学受験・高校受験まで、目標に合わせて学び方を選べます。</p>
+      <p class="policy-note rv">小学1年生から中学3年生まで。日々の学習から中学受験・高校受験まで、目標に合わせて学び方を選べます。</p>
     </div>
   </section>
 
-  <section id="pt-programs" style="padding:96px 56px;background:#fff;">
-    <div style="max-width:1120px;margin:0 auto;">
-      <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;margin-bottom:60px;">
-        <h2 style="font-family:'Zen Kaku Gothic New',sans-serif;font-weight:900;font-size:38px;line-height:1.4;color:#1C1B22;margin:0;max-width:640px;">「わかる」の先にある、<br>本質的な学びを。</h2>
-        <div style="font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:13px;color:#1C1B22;letter-spacing:.1em;">PROGRAM ／ 特色講座</div>
+  <section id="pt-programs" class="section">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <h2>「わかる」の先にある、<br>本質的な学びを。</h2>
+        <div class="sec-label">COURSE ／ コース紹介</div>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px;">
-        <div style="border-radius:28px;overflow:hidden;border:1.5px solid #EEEBE4;">
-          <div style="height:8px;background:#F8BC01;"></div>
-          <div style="padding:34px 28px;">
-            <div style="display:inline-block;font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:12px;color:#8A6A00;background:#FEF3D6;padding:5px 12px;border-radius:100px;margin-bottom:18px;">学びの土台</div>
-            <h3 style="font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:19px;color:#1C1B22;margin:0 0 12px;">アビリティプログラム</h3>
-            <p style="font-family:'Noto Sans JP',sans-serif;font-size:14px;line-height:1.9;color:#6B6A72;margin:0;">集中する力、考える力、最後までやり抜く力。すべての教科を支える「学ぶ力」そのものを、一人ひとりのペースで育てます。</p>
+      <p class="sec-lead rv">学びの土台を育てる小学生向けの講座から、難関校を目指す個別指導まで。三田教室では、目標と学年に合わせて5つのコースをご用意しています。</p>
+
+      <p class="course-sub rv">ELEMENTARY ／ 小学生向け講座</p>
+      <div class="course-grid3 rv" data-stagger>
+        <div class="course-card">
+          <div class="course-bar" style="background:var(--dot-gold)"></div>
+          <div class="course-body">
+            <span class="tag" style="color:var(--tag-gold);background:var(--pale-gold)">少人数グループ指導</span><span class="course-target">小3〜小6</span>
+            <h3 class="item">アドバンスドプログラム</h3>
+            <p class="body-sm">私立中学受験に対応した少人数制のグループ指導。1教科から受講できます。都立中高一貫校の受検にも対応し、小6の夏以降は適性検査の記述対策を個別指導と組み合わせて学習できます。</p>
           </div>
         </div>
-        <div style="border-radius:28px;overflow:hidden;border:1.5px solid #EEEBE4;">
-          <div style="height:8px;background:#F59084;"></div>
-          <div style="padding:34px 28px;">
-            <div style="display:inline-block;font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:12px;color:#C0483A;background:#FCEAE7;padding:5px 12px;border-radius:100px;margin-bottom:18px;">考える力</div>
-            <h3 style="font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:19px;color:#1C1B22;margin:0 0 12px;">パズル道場</h3>
-            <p style="font-family:'Noto Sans JP',sans-serif;font-size:14px;line-height:1.9;color:#6B6A72;margin:0;">パズルや教具を使い、空間認識力や論理的思考力を育てる講座。正解を教え込むのではなく、自分の力で考え抜く経験を大切にしています。</p>
+        <div class="course-card">
+          <div class="course-bar" style="background:var(--dot-coral)"></div>
+          <div class="course-body">
+            <span class="tag" style="color:var(--tag-coral);background:var(--pale-coral)">考える力</span><span class="course-target">小1〜小6</span>
+            <h3 class="item">パズル算数</h3>
+            <p class="body-sm">知識やテクニックに頼らず、じっくり考え、仮説と検証をくりかえして答えを導き出します。「気づく」センスと「解く」チカラを育て、高学年に向けた大切な基盤をつくります。</p>
           </div>
         </div>
-        <div style="border-radius:28px;overflow:hidden;border:1.5px solid #EEEBE4;">
-          <div style="height:8px;background:#47BEE7;"></div>
-          <div style="padding:34px 28px;">
-            <div style="display:inline-block;font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:12px;color:#0F6E8F;background:#EAF7FC;padding:5px 12px;border-radius:100px;margin-bottom:18px;">読解力</div>
-            <h3 style="font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:19px;color:#1C1B22;margin:0 0 12px;">読み解く国語</h3>
-            <p style="font-family:'Noto Sans JP',sans-serif;font-size:14px;line-height:1.9;color:#6B6A72;margin:0;">文章を正確に読み取り、筋道立てて考える力は、国語だけでなくすべての教科の土台になります。「読み解く力」そのものを育てます。</p>
+        <div class="course-card">
+          <div class="course-bar" style="background:var(--dot-aqua)"></div>
+          <div class="course-body">
+            <span class="tag" style="color:var(--tag-aqua);background:var(--pale-aqua)">読解力</span><span class="course-target">小1〜小6</span>
+            <h3 class="item">読みとく国語</h3>
+            <p class="body-sm">良書にたくさん触れることで、表現力・語彙力・読解力を育てます。朗読音声つきなので読書が苦手なお子さまでも楽しく読み進められ、語彙シートで「生きた言葉」を育みます。</p>
           </div>
+        </div>
+      </div>
+
+      <p class="course-sub rv">PERSONAL ／ 個別指導</p>
+      <div class="course-grid2 rv" data-stagger>
+        <div class="course-card">
+          <div class="course-bar" style="background:var(--dot-gold)"></div>
+          <div class="course-body">
+            <span class="tag" style="color:var(--tag-gold);background:var(--pale-gold)">エキスパート講師</span><span class="course-target">小3〜中3</span>
+            <h3 class="item">個別指導 1対1</h3>
+            <p class="body-sm">御三家中学・早慶附属・国立中高などを志望される方のためのコースです。キャリアと実績を持ったエキスパート講師のみが指導を担当します。</p>
+          </div>
+        </div>
+        <div class="course-card">
+          <div class="course-bar" style="background:var(--dot-aqua)"></div>
+          <div class="course-body">
+            <span class="tag" style="color:var(--tag-aqua);background:var(--pale-aqua)">先生1人に、生徒2人</span><span class="course-target">小3〜中3</span>
+            <h3 class="item">個別指導 1対2</h3>
+            <p class="body-sm">1回80分、1講座（1教科）につき毎週1回の授業です。前日までのご連絡で振替授業も可能。グループ指導との併用で苦手教科の克服にも有効で、私立中学のカリキュラムに合わせた学習にも対応します。</p>
+          </div>
+        </div>
+      </div>
+      <p class="course-note rv">※ 中学生向けプログラミング教室「TECHアカデミージュニア」も準備中です。</p>
+    </div>
+  </section>
+
+  <section id="pt-room" class="section" style="background:var(--band)">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <h2>集中できる環境を、<br>ととのえて。</h2>
+        <div class="sec-label">ROOM ／ 教室環境</div>
+      </div>
+      <p class="sec-lead rv">三田教室には、学び方に合わせた3つの空間があります。</p>
+      <div class="room-grid rv" data-stagger>
+        <div class="room-card" style="background:var(--pale-gold)">
+          <div class="room-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="7" cy="8" r="2.6" stroke="#8A6A00" stroke-width="1.6"/><circle cx="17" cy="8" r="2.6" stroke="#8A6A00" stroke-width="1.6"/><path d="M2.5 19c0-3 2-5 4.5-5s4.5 2 4.5 5M12.5 19c0-3 2-5 4.5-5s4.5 2 4.5 5" stroke="#8A6A00" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="item" style="margin-bottom:12px;font-size:18px">グループ教室</h3>
+          <p class="body-sm" style="color:var(--sub)">少人数グループ指導のための教室。先生の目が一人ひとりに届く、ほどよい距離感です。</p>
+        </div>
+        <div class="room-card" style="background:var(--pale-aqua)">
+          <div class="room-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="12" rx="2" stroke="#0F6E8F" stroke-width="1.6"/><path d="M12 4v12M3 10h18" stroke="#0F6E8F" stroke-width="1.6"/></svg>
+          </div>
+          <h3 class="item" style="margin-bottom:12px;font-size:18px">個別ブース</h3>
+          <p class="body-sm" style="color:var(--sub)">1対1・1対2の個別指導専用のブース席。まわりを気にせず、先生とじっくり向き合えます。</p>
+        </div>
+        <div class="room-card" style="background:var(--pale-coral)">
+          <div class="room-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 19V7l8-3 8 3v12" stroke="#C0483A" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 19v-6h6v6" stroke="#C0483A" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="item" style="margin-bottom:12px;font-size:18px">自習室完備</h3>
+          <p class="body-sm" style="color:var(--sub)">授業の前後にも使える自習スペースを完備。集中して学習に取り組めます。</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="pt-about" style="padding:104px 56px;background:#FBF8F3;">
-    <div style="max-width:800px;margin:0 auto;text-align:center;">
-      <div style="font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:13px;color:#1C1B22;letter-spacing:.1em;margin-bottom:18px;">ABOUT ／ クレオスタディについて</div>
-      <h2 style="font-family:'Zen Kaku Gothic New',sans-serif;font-weight:900;font-size:32px;line-height:1.55;color:#1C1B22;margin:0 0 42px;">子どもたちには、もともと<br>「学びたい」という気持ちがある。</h2>
-      <div style="text-align:left;display:flex;flex-direction:column;gap:20px;">
-        <p style="font-family:'Noto Sans JP',sans-serif;font-size:15.5px;line-height:2.05;color:#4A4950;margin:0;">子どもたちは本来、「知りたい」「できるようになりたい」という学習欲求を持っています。クレオスタディが大切にしているのは、その気持ちを引き出し、育て、続けていけるようにすることです。</p>
-        <p style="font-family:'Noto Sans JP',sans-serif;font-size:15.5px;line-height:2.05;color:#4A4950;margin:0;">急速に変わり続けるこれからの社会では、教わったことを覚えるだけでなく、自分で考え、判断し、表現する力、そして新しいことに挑戦し続ける力が必要になると、私たちは考えています。</p>
-        <p style="font-family:'Noto Sans JP',sans-serif;font-size:15.5px;line-height:2.05;color:#4A4950;margin:0;">だからこそ、一人ひとりの理解に合わせて自分のペースで進められる教材を使い、わからないところに寄り添いながら、できるまで、わかるまで、何度でも一緒に取り組みます。</p>
+  <section id="pt-message" class="section">
+    <div class="wrap" style="max-width:880px">
+      <div class="sec-head rv">
+        <h2>教室責任者からの<br>メッセージ</h2>
+        <div class="sec-label">STAFF ／ 職員紹介</div>
       </div>
-      <p style="margin-top:38px;font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:15px;line-height:1.9;color:#1C1B22;">大切なお子さまをお預かりしていることに感謝しながら、スタッフ一同、お子さまの「これから」を全力で支えていきたいと思っています。</p>
+      <div class="message-card rv" style="margin-top:28px">
+        <div class="message-quote"><i>“</i></div>
+        <p class="message-body">現在は、私立中学受験・都立中高一貫校受検を予定している生徒さんに多く通っていただいています。低学年では「パズル算数」と「読みとく国語」で、中学受験に求められる高い思考力と深い読解力を育てています。また中学生では、私立中学に通う生徒さんが個別指導で学習しています。ぜひお気軽にお問い合わせください。</p>
+        <div class="message-sign">
+          <span class="message-role">クレオスタディ三田 教室責任者</span>
+          <span class="message-name">伊藤 友二</span>
+        </div>
+        <p class="message-note">※ 他塾との併用生も受け付けております。</p>
+      </div>
     </div>
   </section>
 
-  <footer id="pt-contact" style="padding:92px 56px 44px;background:#1C1B22;color:#fff;">
-    <div style="max-width:1120px;margin:0 auto;">
-      <div style="text-align:center;margin-bottom:60px;">
-        <h2 style="font-family:'Zen Kaku Gothic New',sans-serif;font-weight:900;font-size:30px;margin:0 0 22px;">まずは、お気軽にご相談ください。</h2>
-        <p style="font-family:'Noto Sans JP',sans-serif;font-size:15px;line-height:1.9;color:rgba(255,255,255,.68);margin:0 0 38px;">無料体験・資料請求も承っています。お子さまに合った学び方を、一緒に見つけましょう。</p>
-        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
-          <a href="#" style="font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:15px;padding:17px 38px;background:#F8BC01;color:#1C1B22;border-radius:100px;">お問い合わせ</a>
-          <a href="#" style="font-family:'Noto Sans JP',sans-serif;font-weight:600;font-size:15px;padding:17px 28px;color:#fff;border:1.5px solid rgba(255,255,255,.4);border-radius:100px;">無料体験・資料請求</a>
+  <section id="pt-about" class="about">
+    <div class="about-inner">
+      <div class="sec-label rv" style="margin-bottom:18px">ABOUT ／ クレオスタディについて</div>
+      <h2 class="rv">子どもたちには、もともと<br>「学びたい」という気持ちがある。</h2>
+      <div class="rv" data-stagger style="display:flex;flex-direction:column;gap:20px;">
+        <p class="para">子どもたちは本来、「知りたい」「できるようになりたい」という学習欲求を持っています。クレオスタディが大切にしているのは、その気持ちを引き出し、育て、続けていけるようにすることです。</p>
+        <p class="para">急速に変わり続けるこれからの社会では、教わったことを覚えるだけでなく、自分で考え、判断し、表現する力、そして新しいことに挑戦し続ける力が必要になると、私たちは考えています。</p>
+        <p class="para">だからこそ、一人ひとりの理解に合わせて自分のペースで進められる教材を使い、わからないところに寄り添いながら、できるまで、わかるまで、何度でも一緒に取り組みます。</p>
+      </div>
+      <p class="about-close rv">大切なお子さまをお預かりしていることに感謝しながら、スタッフ一同、お子さまの「これから」を全力で支えていきたいと思っています。</p>
+    </div>
+  </section>
+
+  <section id="pt-flow" class="section">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <h2>入塾まで、<br>3つのステップ。</h2>
+        <div class="sec-label">FLOW ／ 入塾までの流れ</div>
+      </div>
+      <p class="sec-lead rv">無料体験から入塾まで、お子さまのペースで進められます。</p>
+      <div class="flow-grid rv" data-stagger>
+        <div class="flow-card">
+          <div class="flow-num" style="color:var(--dot-gold)">1</div>
+          <h3 class="item">お問い合わせ・資料請求</h3>
+          <p class="body-sm">お電話（03-5422-9765）またはメールフォームから、お気軽にご連絡ください。資料請求も承っています。</p>
+        </div>
+        <div class="flow-card">
+          <div class="flow-num" style="color:var(--dot-aqua)">2</div>
+          <h3 class="item">無料体験授業</h3>
+          <p class="body-sm">実際の授業を無料でご体験いただけます。教室の雰囲気や先生との相性をお確かめください。</p>
+        </div>
+        <div class="flow-card">
+          <div class="flow-num" style="color:var(--dot-green)">3</div>
+          <h3 class="item">学習相談・ご入塾</h3>
+          <p class="body-sm">お子さまに合った学び方とコースをご相談のうえ、学習スタートです。</p>
         </div>
       </div>
-      <div style="border-top:1px solid rgba(255,255,255,.15);border-bottom:1px solid rgba(255,255,255,.15);padding:32px 0;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:20px;">
+    </div>
+  </section>
+
+  <section id="pt-topics" class="section" style="background:var(--band)">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <h2>Topics</h2>
+        <div class="sec-label">NEWS ／ お知らせ</div>
+      </div>
+      <div class="topics-list rv" data-stagger style="margin-top:28px">
+        <a href="https://www.creo-study.com/studysearch%e3%81%ab%e3%81%a6%e7%b4%b9%e4%bb%8b%e3%81%95%e3%82%8c%e3%81%be%e3%81%97%e3%81%9f" target="_blank" rel="noopener">
+          <span class="topics-date">03.13</span>
+          <span class="topics-title">StudySearchにて紹介されました</span>
+          <span class="topics-arrow">→</span>
+        </a>
+        <a href="https://www.creo-study.com/%ef%bc%92%ef%bc%90%ef%bc%92%ef%bc%95%e5%b9%b4%e3%80%80%e4%b8%8a%e9%87%8e%e5%85%a5%e8%b0%b7%e6%95%99%e5%ae%a4%e3%80%80%e4%b8%ad%e5%ad%a6%e5%85%a5%e8%a9%a6%e3%80%80%e5%90%88%e6%a0%bc%e9%80%9f%e5%a0%b1" target="_blank" rel="noopener">
+          <span class="topics-date">01.13</span>
+          <span class="topics-title">2025年 中学入試 合格実績</span>
+          <span class="topics-arrow">→</span>
+        </a>
+        <a href="https://www.creo-study.com/2024%e4%b8%ad%e5%ad%a6%e5%8f%97%e9%a8%93%e5%90%88%e6%a0%bc%e5%ae%9f%e7%b8%be%e3%80%90%e4%b8%8a%e9%87%8e%e5%85%a5%e8%b0%b7%e3%80%91" target="_blank" rel="noopener">
+          <span class="topics-date">01.23</span>
+          <span class="topics-title">2024 合格実績</span>
+          <span class="topics-arrow">→</span>
+        </a>
+      </div>
+      <a class="topics-more rv" href="https://www.creo-study.com/blog" target="_blank" rel="noopener">一覧を見る →</a>
+    </div>
+  </section>
+
+  <section id="pt-access" class="section">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <h2>4つの駅から通える、<br>便利な立地。</h2>
+        <div class="sec-label">ACCESS ／ アクセス</div>
+      </div>
+      <div class="access-grid rv" data-stagger style="margin-top:28px">
+        <div class="access-card">
+          <div>
+            <div class="access-dt">住所</div>
+            <div class="access-dd">〒108-0073<br>東京都港区三田4-19-19 栄光堂三田ビル3階</div>
+          </div>
+          <div>
+            <div class="access-dt">電話番号</div>
+            <div class="access-dd">03-5422-9765<br>（平日14:00〜20:00／土曜10:30〜18:30）</div>
+          </div>
+          <div>
+            <div class="access-dt">最寄駅</div>
+            <div class="access-dd">
+              <div class="station"><span>都営浅草線・京急本線「泉岳寺駅」</span><b>徒歩2分</b></div>
+              <div class="station"><span>JR山手線・京浜東北線「高輪ゲートウェイ駅」</span><b>徒歩8分</b></div>
+              <div class="station"><span>東京メトロ南北線「白金高輪駅」</span><b>徒歩10分</b></div>
+              <div class="station"><span>都営三田線・浅草線「三田駅」</span><b>徒歩11分</b></div>
+            </div>
+          </div>
+        </div>
+        <div class="access-map">
+          <iframe src="https://www.google.com/maps?q=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%AF%E5%8C%BA%E4%B8%89%E7%94%B04-19-19&z=16&output=embed" loading="lazy" title="クレオスタディ三田教室の地図" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="pt-contact" class="footer">
+    <div class="wrap">
+      <div class="footer-cta rv">
+        <h2>まずは、お気軽にご相談ください。</h2>
+        <p>無料体験・資料請求も承っています。お子さまに合った学び方を、一緒に見つけましょう。</p>
+        <div class="row">
+          <a class="btn-gold" href="https://www.creo-study.com/contact/" target="_blank" rel="noopener">お問い合わせ</a>
+          <a class="btn-dark-outline" href="https://www.creo-study.com/contact-trial/" target="_blank" rel="noopener">無料体験授業のお申込み</a>
+          <a class="btn-dark-outline" href="https://www.creo-study.com/contact-request/" target="_blank" rel="noopener">資料請求</a>
+        </div>
+      </div>
+      <div class="footer-info rv">
         <div>
-          <div style="font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:15px;color:#fff;margin-bottom:10px;">三田教室</div>
-          <div style="font-family:'Noto Sans JP',sans-serif;font-size:12.5px;color:rgba(255,255,255,.55);line-height:1.9;">
+          <h4>三田教室</h4>
+          <div class="detail">
             対象：小学1年生〜中学3年生<br>
             東京都港区三田4-19-19 栄光堂三田ビル3階<br>
             TEL：03-5422-9765（平日14:00〜20:00／土曜10:30〜18:30）<br>
             都営浅草・京急本線「泉岳寺駅」／JR山手・京浜東北線「高輪ゲートウェイ駅」／東京メトロ南北線「白金高輪駅」／都営三田・浅草線「三田駅」
           </div>
         </div>
-        <a href="https://www.creo-study.com/ueno" style="font-family:'Noto Sans JP',sans-serif;font-weight:600;font-size:13px;color:#F8BC01;border-bottom:1px solid #F8BC01;padding-bottom:2px;white-space:nowrap;">姉妹校：上野入谷教室 →</a>
+        <a class="sister-link" href="https://www.creo-study.com/ueno" target="_blank" rel="noopener">姉妹校：上野入谷教室 →</a>
       </div>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:36px;padding-top:26px;">
-        <img src="assets/creo-logo-mark.png" alt="Creo Study" style="height:22px;opacity:.9;">
-        <span style="font-family:'Noto Sans JP',sans-serif;font-size:12px;color:rgba(255,255,255,.4);">© Creo Study</span>
+      <div class="footer-bar">
+        <img src="assets/creo-logo-mark.png" alt="Creo Study">
+        <span>© Creo Study</span>
       </div>
     </div>
   </footer>
 
-</div>
+  <button class="to-top" aria-label="ページ上部へ戻る">↑</button>
+
+<script>
+(function () {
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* motion personality — C: big, snappy rise (values live in CSS :root) */
+  var STAGGER = 70;
+  var ONCE = true;
+
+  document.querySelectorAll('[data-stagger]').forEach(function (group) {
+    Array.prototype.forEach.call(group.children, function (child, i) {
+      child.style.transitionDelay = (i * STAGGER) + 'ms';
+      child.classList.add('rv');
+    });
+  });
+
+  if (!reduced && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('on');
+          if (ONCE) io.unobserve(e.target);
+        } else if (!ONCE) {
+          e.target.classList.remove('on');
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -7% 0px' });
+    document.querySelectorAll('.rv').forEach(function (el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('.rv').forEach(function (el) { el.classList.add('on'); });
+  }
+
+  var header = document.querySelector('.site-header');
+  var toTop = document.querySelector('.to-top');
+  var progress = document.querySelector('.progress');
+  window.addEventListener('scroll', function () {
+    header.classList.toggle('scrolled', window.scrollY > 24);
+    toTop.classList.toggle('show', window.scrollY > 600);
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.transform = 'scaleX(' + (max > 0 ? window.scrollY / max : 0) + ')';
+  }, { passive: true });
+
+  toTop.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+  });
+
+  var toggle = document.querySelector('.nav-toggle');
+  toggle.addEventListener('click', function () { document.body.classList.toggle('nav-open'); });
+  document.querySelectorAll('.site-nav a').forEach(function (a) {
+    a.addEventListener('click', function () { document.body.classList.remove('nav-open'); });
+  });
+})();
+</script>
 </body>
 </html>
