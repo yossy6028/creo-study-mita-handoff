@@ -137,11 +137,11 @@
   .mq-track .mdot { width: 14px; height: 14px; border-radius: 50%; display: inline-block; flex: none; }
   @keyframes mq { to { transform: translateX(-50%); } }
 
-  /* ---- photo clip reveal ---- */
-  .ph { clip-path: inset(0 100% 0 0); transition: clip-path .9s var(--rv-e); }
-  .ph img { transform: scale(1.12); }
-  .ph.on { clip-path: inset(0); }
-  .ph.on img { transform: none; }
+  /* ---- photo clip reveal ----
+     clip-pathは監視対象(.ph)ではなく子のimgに掛ける。
+     観測要素自身をclipすると交差面積0となりIntersectionObserverが発火しない */
+  .ph img { clip-path: inset(0 100% 0 0); transform: scale(1.12); }
+  .ph.on img { clip-path: inset(0); transform: none; }
 
   /* ---- floating CTA ---- */
   .float-cta { position: fixed; right: 28px; bottom: 96px; z-index: 40; display: flex; flex-direction: column; gap: 3px; padding: 16px 26px; background: var(--dot-gold); color: var(--dark); border-radius: 22px; box-shadow: 0 14px 34px rgba(248,188,1,.35); opacity: 0; transform: translateY(14px); pointer-events: none; transition: opacity .4s ease, transform .4s var(--rv-e), box-shadow .3s ease; }
@@ -177,7 +177,7 @@
   .course-card:hover { transform: translateY(-6px); box-shadow: 0 20px 44px rgba(28,27,34,.1); }
   .course-bar { height: 8px; }
   .course-photo { width: 100%; aspect-ratio: 4/3; overflow: hidden; }
-  .course-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s var(--rv-e); }
+  .course-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: clip-path .9s var(--rv-e), transform .6s var(--rv-e); }
   .course-card:hover .course-photo img { transform: scale(1.06); }
   .course-body { padding: 32px 28px; }
   .course-target { display: inline-block; font-weight: 700; font-size: 11.5px; color: var(--sub); border: 1.5px solid var(--line); padding: 4px 12px; border-radius: 100px; margin: 0 0 14px 8px; }
@@ -188,7 +188,7 @@
   .room-card { border-radius: 28px; padding: 0; overflow: hidden; transition: transform .35s var(--rv-e); }
   .room-card:hover { transform: translateY(-6px); }
   .room-photo { width: 100%; aspect-ratio: 4/3; overflow: hidden; }
-  .room-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s var(--rv-e); }
+  .room-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: clip-path .9s var(--rv-e), transform .6s var(--rv-e); }
   .room-card:hover .room-photo img { transform: scale(1.06); }
   .room-body { padding: 32px 32px 38px; }
   .room-icon { width: 52px; height: 52px; border-radius: 16px; background: #fff; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
@@ -292,8 +292,7 @@
     .hero-bg img { animation: none !important; transform: none !important; transition: none !important; }
     .badge-wheel, .dot-cluster span { animation: none !important; }
     .ch { transform: none !important; transition: none !important; }
-    .ph { clip-path: none !important; transition: none !important; }
-    .ph img { transform: none !important; }
+    .ph img { clip-path: none !important; transform: none !important; transition: none !important; }
     .mq-track { animation: none !important; }
     .loader { display: none !important; }
     .scroll-cue i::after { animation: none !important; }
