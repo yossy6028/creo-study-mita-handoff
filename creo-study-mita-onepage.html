@@ -18,7 +18,10 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "EducationalOrganization",
+  "@type": [
+    "EducationalOrganization",
+    "LocalBusiness"
+  ],
   "name": "クレオスタディ 三田教室",
   "alternateName": "Creo Study 三田教室",
   "description": "港区三田の学習塾。パズル算数・読みとく国語のアビリティプログラム、少人数グループ指導の中学受験コース、1対1・1対2の個別指導。対象は小学1年生から中学3年生。",
@@ -36,11 +39,78 @@
     "@type": "OfferCatalog",
     "name": "コース",
     "itemListElement": [
-      {"@type": "Offer", "itemOffered": {"@type": "Course", "name": "アビリティプログラム（パズル算数・読みとく国語）", "description": "小1〜小6。考える力と読む力、学びの土台を育てる講座。", "provider": {"@type": "EducationalOrganization", "name": "クレオスタディ 三田教室"}}},
-      {"@type": "Offer", "itemOffered": {"@type": "Course", "name": "中学受験（アドバンスドプログラム）", "description": "小3〜小6。私立中学受験・都立中高一貫校受検に対応した少人数グループ指導。", "provider": {"@type": "EducationalOrganization", "name": "クレオスタディ 三田教室"}}},
-      {"@type": "Offer", "itemOffered": {"@type": "Course", "name": "個別指導（1対1・1対2）", "description": "小3〜中3。お子さまのペースでカリキュラムを組み立てる個別指導。", "provider": {"@type": "EducationalOrganization", "name": "クレオスタディ 三田教室"}}}
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Course",
+          "name": "アビリティプログラム（パズル算数・読みとく国語）",
+          "description": "小1〜小6。考える力と読む力、学びの土台を育てる講座。",
+          "provider": {
+            "@type": "EducationalOrganization",
+            "name": "クレオスタディ 三田教室"
+          }
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Course",
+          "name": "中学受験（アドバンスドプログラム）",
+          "description": "小3〜小6。私立中学受験・都立中高一貫校受検に対応した少人数グループ指導。",
+          "provider": {
+            "@type": "EducationalOrganization",
+            "name": "クレオスタディ 三田教室"
+          }
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Course",
+          "name": "個別指導（1対1・1対2）",
+          "description": "小3〜中3。お子さまのペースでカリキュラムを組み立てる個別指導。",
+          "provider": {
+            "@type": "EducationalOrganization",
+            "name": "クレオスタディ 三田教室"
+          }
+        }
+      }
     ]
-  }
+  },
+  "@id": "#creo-study-mita",
+  "image": "assets/generated/hero-fullscreen-a.jpeg",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "student",
+    "audienceType": "小学1年生〜中学3年生"
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "14:00",
+      "closes": "20:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Saturday",
+      "opens": "10:30",
+      "closes": "18:30"
+    }
+  ],
+  "knowsAbout": [
+    "中学受験",
+    "都立中高一貫校の受検対策",
+    "パズル算数",
+    "語彙力・読書",
+    "個別指導"
+  ]
 }
 </script>
 <!-- よくある質問の構造化データ（ページ内のFAQと同じ文面。料金は確定後に追加する） -->
@@ -49,14 +119,121 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {"@type": "Question", "name": "最寄り駅から何分ですか？", "acceptedAnswer": {"@type": "Answer", "text": "都営浅草線・京急本線「泉岳寺駅」から徒歩2分です。JR「高輪ゲートウェイ駅」から徒歩8分、東京メトロ南北線「白金高輪駅」から徒歩10分、都営三田線・浅草線「三田駅」から徒歩11分です。"}},
-    {"@type": "Question", "name": "何年生から通えますか？", "acceptedAnswer": {"@type": "Answer", "text": "小学1年生から中学3年生まで通っていただけます。アビリティプログラム（パズル算数・読みとく国語）は小1〜小6、中学受験コースは小3〜小6、個別指導は小3〜中3が対象です。"}},
-    {"@type": "Question", "name": "体験授業はできますか？", "acceptedAnswer": {"@type": "Answer", "text": "はい、無料体験授業を行っています。お問い合わせフォーム、またはお電話でお申し込みください。"}},
-    {"@type": "Question", "name": "中学受験をしない場合も通えますか？", "acceptedAnswer": {"@type": "Answer", "text": "はい。アビリティプログラム（パズル算数・読みとく国語）は、考える力や読む力といった学びの土台を育てる講座で、中学受験をしないお子さまも受講いただけます。"}},
-    {"@type": "Question", "name": "都立中高一貫校の受検にも対応していますか？", "acceptedAnswer": {"@type": "Answer", "text": "はい。中学受験コース（アドバンスドプログラム）で対応しています。小6の夏以降は、適性検査で求められる記述対策を個別指導と組み合わせて学習できます。"}},
-    {"@type": "Question", "name": "他の塾と併用できますか？", "acceptedAnswer": {"@type": "Answer", "text": "はい、他塾との併用生も受け付けております。ご家庭の状況に合わせてご相談ください。"}},
-    {"@type": "Question", "name": "授業を休んだ場合、振替はできますか？", "acceptedAnswer": {"@type": "Answer", "text": "個別指導（1対2）は、前日までにご連絡いただければ振替授業が可能です。"}}
+    {
+      "@type": "Question",
+      "name": "クレオスタディ三田教室はどんな塾ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "港区三田にある学習塾で、小学1年生から中学3年生までが通えます。考える力と読む力を育てる「アビリティプログラム」、私立中学受験・都立中高一貫校の受検に対応した少人数グループ指導の「中学受験」、1対1・1対2の「個別指導」の3つのコースがあります。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "最寄り駅から何分ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "都営浅草線・京急本線「泉岳寺駅」から徒歩2分です。JR「高輪ゲートウェイ駅」から徒歩8分、東京メトロ南北線「白金高輪駅」から徒歩10分、都営三田線・浅草線「三田駅」から徒歩11分です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "何年生から通えますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "小学1年生から中学3年生まで通っていただけます。アビリティプログラム（パズル算数・読みとく国語）は小1〜小6、中学受験コースは小3〜小6、個別指導は小3〜中3が対象です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "体験授業はできますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "はい、無料体験授業を行っています。お問い合わせフォーム、またはお電話でお申し込みください。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "中学受験をしない場合も通えますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "はい。アビリティプログラム（パズル算数・読みとく国語）は、考える力や読む力といった学びの土台を育てる講座で、中学受験をしないお子さまも受講いただけます。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "都立中高一貫校の受検にも対応していますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "はい。中学受験コース（アドバンスドプログラム）で対応しています。小6の夏以降は、適性検査で求められる記述対策を個別指導と組み合わせて学習できます。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "他の塾と併用できますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "はい、他塾との併用生も受け付けております。ご家庭の状況に合わせてご相談ください。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "授業を休んだ場合、振替はできますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "個別指導（1対2）は、前日までにご連絡いただければ振替授業が可能です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "アビリティプログラムとは何ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "「パズル算数」と「読みとく国語」の2つからなる、小1〜小6向けの講座です。中学受験をするかどうかにかかわらず、すべての教科を支える考える力と読む力を育てます。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "パズル算数とは何ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "知識やテクニックに頼らず、じっくり考え、仮説と検証をくりかえして答えを導き出す算数の講座です。「気づく」センスと「解く」チカラを育て、高学年に向けた基盤をつくります。対象は小1〜小6です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "読みとく国語とは何ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "良書にたくさん触れることで、語彙力・表現力を育てる国語の講座です。朗読音声つきなので、読書が苦手なお子さまでも楽しく読み進められます。読書の前後には語彙シートに取り組み、「生きた言葉」を育みます。対象は小1〜小6です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "個別指導の1対1と1対2は何が違いますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "1対1は、キャリアと実績を持つエキスパート講師がマンツーマンで指導するコースで、御三家中学・早慶附属・国立中高などを志望する方向けです。1対2は先生1人に生徒2人で、1回80分・1教科につき毎週1回の授業です。どちらも対象は小3〜中3です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "電話での問い合わせは何時まで受け付けていますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "平日14:00〜20:00、土曜10:30〜18:30です。電話番号は03-5422-9765です。"
+      }
+    }
   ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "港区三田・泉岳寺の学習塾 クレオスタディ三田教室",
+  "inLanguage": "ja",
+  "dateModified": "2026-11-18",
+  "about": {"@id": "#creo-study-mita"}
 }
 </script>
 <style>
@@ -321,6 +498,30 @@
     .topics-arrow { display: none; }
   }
 
+
+  /* ===== AIO: 要約と早見表 ===== */
+  .summary { padding-top: 72px; padding-bottom: 24px; }
+  .summary-box { max-width: 900px; margin: 0 auto; background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 40px 44px; }
+  .summary-box h2 { font-family: var(--round); font-weight: 800; font-size: 24px; line-height: 1.6; margin: 0 0 16px; }
+  .summary-box p { font-size: 15px; line-height: 2.05; color: var(--sub); margin: 0 0 14px; }
+  .summary-box .asof { font-size: 12.5px; color: var(--faint); margin: 18px 0 0; }
+  .spec-wrap { max-width: 1120px; margin: 40px auto 0; overflow-x: auto; }
+  .spec-table { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--line); font-size: 14px; line-height: 1.8; }
+  .spec-table caption { text-align: left; font-weight: 700; font-size: 15px; padding: 0 0 12px; color: var(--ink); }
+  .spec-table th, .spec-table td { padding: 14px 16px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+  .spec-table thead th { background: var(--pale-gold); font-weight: 700; white-space: nowrap; }
+  .spec-table tbody th { font-weight: 700; white-space: nowrap; }
+  .spec-table td { color: var(--sub); }
+  .spec-table td:nth-of-type(1) { white-space: nowrap; }
+  @media (max-width: 960px) { .summary-box { padding: 28px 22px; } .summary-box h2 { font-size: 20px; } .spec-table, .spec-table tbody, .spec-table tr, .spec-table th, .spec-table td { display: block; }
+    .spec-table thead { display: none; }
+    .spec-table caption { display: block; padding: 14px 16px 0; }
+    .spec-table tr { border-bottom: 1px solid var(--line); padding: 14px 16px; }
+    .spec-table th, .spec-table td { border: 0; padding: 2px 0; white-space: normal; }
+    .spec-table td:nth-of-type(1)::before { content: "対象："; font-weight: 600; color: var(--ink); }
+    .spec-table td:nth-of-type(2)::before { content: "形式："; font-weight: 600; color: var(--ink); }
+    .spec-table tbody th br { display: none; } }
+
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .rv, .hero-in { opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important; }
@@ -459,6 +660,28 @@
     </div>
   </div>
 
+  <!-- ===== 要約（検索・AIが最初に拾う説明）と早見表 ===== -->
+  <section id="about" class="section summary">
+    <div class="summary-box rv">
+      <h2>クレオスタディ三田教室とは</h2>
+      <p>クレオスタディ三田教室は、東京都港区三田4-19-19 栄光堂三田ビル3階にある学習塾です。都営浅草線・京急本線「泉岳寺駅」から徒歩2分で、小学1年生から中学3年生までが通えます。</p>
+      <p>コースは3つあります。考える力と読む力を育てる「アビリティプログラム」（パズル算数・読みとく国語、小1〜小6）、私立中学受験・都立中高一貫校の受検に対応した少人数グループ指導の「中学受験」（小3〜小6）、1対1・1対2で学ぶ「個別指導」（小3〜中3）です。無料体験授業を受け付けています。</p>
+      <p class="asof">最終更新：2026年11月</p>
+    </div>
+    <div class="spec-wrap rv">
+      <table class="spec-table">
+        <caption>コース早見表</caption>
+        <thead><tr><th scope="col">コース</th><th scope="col">対象学年</th><th scope="col">形式</th><th scope="col">内容</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">アビリティプログラム<br>（パズル算数・読みとく国語）</th><td>小1〜小6</td><td>講座</td><td>パズル算数は、仮説と検証をくりかえして答えを導き、「気づく」センスと「解く」チカラを育てます。読みとく国語は、良書にたくさん触れて語彙力・表現力を育てます。</td></tr>
+          <tr><th scope="row">中学受験<br>（アドバンスドプログラム）</th><td>小3〜小6</td><td>少人数グループ指導（1教科から）</td><td>私立中学受験と都立中高一貫校の受検に対応。小6の夏以降は、適性検査の記述対策を個別指導と組み合わせて学べます。</td></tr>
+          <tr><th scope="row">個別指導 1対1</th><td>小3〜中3</td><td>マンツーマン</td><td>御三家中学・早慶附属・国立中高などを志望する方向け。キャリアと実績を持つエキスパート講師が担当します。</td></tr>
+          <tr><th scope="row">個別指導 1対2</th><td>小3〜中3</td><td>先生1人に生徒2人</td><td>1回80分、1教科につき毎週1回。前日までの連絡で振替授業が可能。グループ指導との併用もできます。</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
   <!-- ===== 1. コース（3本柱） ===== -->
   <section id="services" class="section">
     <div class="wrap">
@@ -586,6 +809,10 @@
       </div>
       <div class="faq-list rv" data-stagger>
         <details class="faq-item">
+          <summary><span class="faq-q">Q</span><span>クレオスタディ三田教室はどんな塾ですか？</span><span class="faq-mark"></span></summary>
+          <p class="faq-a">港区三田にある学習塾で、小学1年生から中学3年生までが通えます。考える力と読む力を育てる「アビリティプログラム」、私立中学受験・都立中高一貫校の受検に対応した少人数グループ指導の「中学受験」、1対1・1対2の「個別指導」の3つのコースがあります。</p>
+        </details>
+        <details class="faq-item">
           <summary><span class="faq-q">Q</span><span>授業料はいくらですか？</span><span class="faq-mark"></span></summary>
           <p class="faq-a">学年・コース・受講回数によって異なります。<span class="todo">【要確認】料金表（入塾金・授業料・教材費）を掲載予定</span></p>
         </details>
@@ -616,6 +843,26 @@
         <details class="faq-item">
           <summary><span class="faq-q">Q</span><span>授業を休んだ場合、振替はできますか？</span><span class="faq-mark"></span></summary>
           <p class="faq-a">個別指導（1対2）は、前日までにご連絡いただければ振替授業が可能です。<span class="todo">【要確認】グループ指導の振替ルール</span></p>
+        </details>
+        <details class="faq-item">
+          <summary><span class="faq-q">Q</span><span>アビリティプログラムとは何ですか？</span><span class="faq-mark"></span></summary>
+          <p class="faq-a">「パズル算数」と「読みとく国語」の2つからなる、小1〜小6向けの講座です。中学受験をするかどうかにかかわらず、すべての教科を支える考える力と読む力を育てます。</p>
+        </details>
+        <details class="faq-item">
+          <summary><span class="faq-q">Q</span><span>パズル算数とは何ですか？</span><span class="faq-mark"></span></summary>
+          <p class="faq-a">知識やテクニックに頼らず、じっくり考え、仮説と検証をくりかえして答えを導き出す算数の講座です。「気づく」センスと「解く」チカラを育て、高学年に向けた基盤をつくります。対象は小1〜小6です。</p>
+        </details>
+        <details class="faq-item">
+          <summary><span class="faq-q">Q</span><span>読みとく国語とは何ですか？</span><span class="faq-mark"></span></summary>
+          <p class="faq-a">良書にたくさん触れることで、語彙力・表現力を育てる国語の講座です。朗読音声つきなので、読書が苦手なお子さまでも楽しく読み進められます。読書の前後には語彙シートに取り組み、「生きた言葉」を育みます。対象は小1〜小6です。</p>
+        </details>
+        <details class="faq-item">
+          <summary><span class="faq-q">Q</span><span>個別指導の1対1と1対2は何が違いますか？</span><span class="faq-mark"></span></summary>
+          <p class="faq-a">1対1は、キャリアと実績を持つエキスパート講師がマンツーマンで指導するコースで、御三家中学・早慶附属・国立中高などを志望する方向けです。1対2は先生1人に生徒2人で、1回80分・1教科につき毎週1回の授業です。どちらも対象は小3〜中3です。</p>
+        </details>
+        <details class="faq-item">
+          <summary><span class="faq-q">Q</span><span>電話での問い合わせは何時まで受け付けていますか？</span><span class="faq-mark"></span></summary>
+          <p class="faq-a">平日14:00〜20:00、土曜10:30〜18:30です。電話番号は03-5422-9765です。</p>
         </details>
       </div>
     </div>
