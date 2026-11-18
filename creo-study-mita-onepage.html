@@ -196,7 +196,7 @@
       "name": "パズル算数とは何ですか？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "知識やテクニックに頼らず、じっくり考え、仮説と検証をくりかえして答えを導き出す算数の講座です。「気づく」センスと「解く」チカラを育て、高学年に向けた基盤をつくります。対象は小1〜小6です。"
+        "text": "知識やテクニックに頼らず、じっくり時間をかけて考え、仮説と検証をくりかえして答えを導き出す算数の講座です。イメージ力と思考力、「気づく」センスと「解く」チカラを育て、高学年に向けた基盤をつくります。対象は小1〜小6です。"
       }
     },
     {
@@ -204,7 +204,7 @@
       "name": "読みとく国語とは何ですか？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "良書にたくさん触れることで、語彙力・表現力を育てる国語の講座です。朗読音声つきなので、読書が苦手なお子さまでも楽しく読み進められます。読書の前後には語彙シートに取り組み、「生きた言葉」を育みます。対象は小1〜小6です。"
+        "text": "良書にたくさん触れることで、表現力・語彙力・読解力を育てる国語の講座です。朗読音声つきなので、読書が苦手なお子さまでも楽しく読み進められます。読書の前後には語彙シートに取り組み、「生きた言葉」を育みます。対象は小1〜小6です。"
       }
     },
     {
@@ -553,6 +553,19 @@
   .svc-list span { display: block; font-size: 13px; line-height: 1.85; color: var(--sub2); }
   .svc-note { text-align: center; font-size: 13.5px; color: var(--faint); margin: 36px 0 0; line-height: 1.9; }
 
+
+  /* アビリティプログラム（元サイト同等の説明量） */
+  .pillar-head { display: flex; gap: 20px; align-items: flex-start; max-width: 900px; margin: 0 auto 28px; }
+  .pillar-num { font: 700 15px/1 ui-monospace, monospace; padding-top: 10px; }
+  .pillar-title { font-family: var(--round); font-weight: 800; font-size: 24px; margin: 0 0 8px; }
+  .pillar-lead { font-size: 14.5px; line-height: 1.95; color: var(--sub); margin: 0; }
+  .ability-grid { max-width: 1120px; }
+  .point-list { margin: 16px 0 0; padding: 0 0 0 1.2em; display: flex; flex-direction: column; gap: 8px; }
+  .point-list li { font-size: 14px; line-height: 1.85; color: var(--sub2); }
+  .point-list li::marker { color: var(--dot-gold); }
+  .detail-link { display: inline-block; margin-top: 20px; font-size: 13.5px; font-weight: 600; color: var(--gold); border-bottom: 1px solid var(--gold); padding-bottom: 2px; transition: opacity .3s ease; }
+  .detail-link:hover { opacity: .6; }
+
   /* FAQ */
   .faq-list { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
   .faq-item { background: var(--card); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
@@ -679,23 +692,50 @@
         <p class="lead">学びの土台づくりから中学受験、苦手克服や難関校対策まで。少人数グループ指導と個別指導を組み合わせて、お子さまに合った学び方をご提案します。</p>
       </div>
 
-      <div class="svc-grid rv" data-stagger>
-        <article class="card svc-card" id="ability">
+      <!-- 01 アビリティプログラム：パズル算数・読みとく国語（元サイトの説明量・写真・詳細リンクを維持） -->
+      <div class="pillar-head rv" id="ability">
+        <span class="pillar-num" style="color:var(--coral)">01</span>
+        <div>
+          <h3 class="pillar-title">アビリティプログラム</h3>
+          <p class="pillar-lead">小1〜小6｜中学受験をするかどうかにかかわらず、すべての教科を支える「考える力」と「読む力」を低学年から育てます。</p>
+        </div>
+      </div>
+      <div class="course-grid2 ability-grid rv" data-stagger>
+        <article class="card course-card" id="puzzle">
           <div class="course-photo ph"><img src="assets/mita-photos/puzzle.jpg" alt="パズル算数の教材"></div>
           <div class="course-body" style="border-top:5px solid var(--dot-coral)">
-            <div class="course-num" style="color:var(--coral);margin-top:16px">01</div>
-            <span class="course-target">小1〜小6</span>
-            <h3 class="item">アビリティプログラム</h3>
-            <div class="course-tag" style="color:var(--coral)">考える力と読む力、学びの土台を育てる</div>
-            <p class="body-sm">中学受験をするかどうかにかかわらず、すべての教科を支える力を低学年から育てます。</p>
-            <ul class="svc-list">
-              <li><b>パズル算数</b><span>知識やテクニックに頼らず、じっくり考え、仮説と検証をくりかえして答えを導き出します。「気づく」センスと「解く」チカラを育てます。</span></li>
-              <li><b>読みとく国語</b><span>良書にたくさん触れることで、語彙力・表現力を育てます。朗読音声つきなので、読書が苦手なお子さまでも楽しく読み進められます。</span></li>
+            <span class="course-target" style="margin-top:16px">小1〜小6</span>
+            <h3 class="item">パズル算数</h3>
+            <div class="course-tag" style="color:var(--coral)">イメージ力と思考力を育てる</div>
+            <p class="body-sm">知識やテクニックに頼らず、じっくり時間をかけて考え、仮説と検証をくりかえして答えを導き出します。</p>
+            <ul class="point-list">
+              <li>図形や数の「イメージ力」と、筋道を立てて考える「思考力」を育てます</li>
+              <li>答えに「気づく」センスと、最後まで「解く」チカラを伸ばします</li>
+              <li>高学年の算数に向けた、大切な基盤をつくります</li>
             </ul>
+            <a class="detail-link" href="https://www.milai-study.jp/" target="_blank" rel="noopener">プログラムの詳細（みらスタ） →</a>
           </div>
         </article>
+        <article class="card course-card" id="yomitoku">
+          <div class="course-photo ph"><img src="assets/mita-photos/yomitoku.jpg" alt="読みとく国語の教材"></div>
+          <div class="course-body" style="border-top:5px solid var(--dot-aqua)">
+            <span class="course-target" style="margin-top:16px">小1〜小6</span>
+            <h3 class="item">読みとく国語</h3>
+            <div class="course-tag" style="color:var(--aqua)">すべての教科を支える読解力</div>
+            <p class="body-sm">良書にたくさん触れることで、表現力・語彙力・読解力を育てます。</p>
+            <ul class="point-list">
+              <li>朗読音声つきなので、読書が苦手なお子さまでも楽しく読み進められます</li>
+              <li>読書の前後に取り組む語彙シートで、「生きた言葉」を身につけます</li>
+              <li>本を読む習慣が、国語だけでなくすべての教科の土台になります</li>
+            </ul>
+            <a class="detail-link" href="https://site.kotobanogakko.com/kotoba/" target="_blank" rel="noopener">プログラムの詳細（読むとくメソッド＠ことばの学校） →</a>
+          </div>
+        </article>
+      </div>
 
-        <article class="card svc-card" id="juken">
+      <!-- 02 中学受験 ／ 03 個別指導 -->
+      <div class="course-grid3 rv" data-stagger style="margin-top:56px;margin-bottom:0">
+        <article class="card course-card" id="juken">
           <div class="course-photo ph"><img src="assets/mita-photos/advanced.jpg" alt="中学受験コースの授業風景"></div>
           <div class="course-body" style="border-top:5px solid var(--dot-gold)">
             <div class="course-num" style="color:var(--gold);margin-top:16px">02</div>
@@ -705,19 +745,24 @@
             <p class="body-sm">私立中学受験に対応した少人数制のグループ指導です。都立中高一貫校の受検にも対応し、小6の夏以降は適性検査で求められる記述対策を、個別指導と組み合わせて学習できます。</p>
           </div>
         </article>
-
-        <article class="card svc-card" id="kobetsu">
-          <div class="course-photo ph"><img src="assets/mita-photos/private1on2.jpg" alt="個別指導の授業風景"></div>
-          <div class="course-body" style="border-top:5px solid var(--dot-aqua)">
-            <div class="course-num" style="color:var(--aqua);margin-top:16px">03</div>
+        <article class="card course-card" id="kobetsu">
+          <div class="course-photo ph"><img src="assets/mita-photos/private1on1.jpg" alt="個別指導1対1の授業風景"></div>
+          <div class="course-body" style="border-top:5px solid var(--dot-green)">
+            <div class="course-num" style="color:var(--green);margin-top:16px">03</div>
             <span class="course-target">小3〜中3</span>
-            <h3 class="item">個別指導</h3>
-            <div class="course-tag" style="color:var(--aqua)">1対1・1対2で、わかるまで</div>
-            <p class="body-sm">先生とじっくり向き合い、お子さまのペースでカリキュラムを組み立てます。</p>
-            <ul class="svc-list">
-              <li><b>1対1</b><span>御三家中学・早慶附属・国立中高などを志望される方のためのコース。キャリアと実績を持ったエキスパート講師が担当します。</span></li>
-              <li><b>1対2</b><span>1回80分、1教科につき毎週1回。グループ指導との併用で苦手教科の克服にも。私立中学のカリキュラムに合わせた学習にも対応します。</span></li>
-            </ul>
+            <h3 class="item">個別指導 1対1</h3>
+            <div class="course-tag" style="color:var(--green)">エキスパート講師のマンツーマン</div>
+            <p class="body-sm">御三家中学・早慶附属・国立中高などを志望される方のためのコースです。キャリアと実績を持ったエキスパート講師のみが指導を担当します。</p>
+          </div>
+        </article>
+        <article class="card course-card">
+          <div class="course-photo ph"><img src="assets/mita-photos/private1on2.jpg" alt="個別指導1対2の授業風景"></div>
+          <div class="course-body" style="border-top:5px solid var(--dot-green)">
+            <div class="course-num" style="color:var(--green);margin-top:16px">03</div>
+            <span class="course-target">小3〜中3</span>
+            <h3 class="item">個別指導 1対2</h3>
+            <div class="course-tag" style="color:var(--green)">先生1人に、生徒2人</div>
+            <p class="body-sm">1回80分、1講座（1教科）につき毎週1回の授業です。前日までのご連絡で振替授業も可能。グループ指導との併用で苦手教科の克服にも有効で、私立中学のカリキュラムに合わせた学習にも対応します。</p>
           </div>
         </article>
       </div>
@@ -838,11 +883,11 @@
         </details>
         <details class="faq-item">
           <summary><span class="faq-q">Q</span><span>パズル算数とは何ですか？</span><span class="faq-mark"></span></summary>
-          <p class="faq-a">知識やテクニックに頼らず、じっくり考え、仮説と検証をくりかえして答えを導き出す算数の講座です。「気づく」センスと「解く」チカラを育て、高学年に向けた基盤をつくります。対象は小1〜小6です。</p>
+          <p class="faq-a">知識やテクニックに頼らず、じっくり時間をかけて考え、仮説と検証をくりかえして答えを導き出す算数の講座です。イメージ力と思考力、「気づく」センスと「解く」チカラを育て、高学年に向けた基盤をつくります。対象は小1〜小6です。</p>
         </details>
         <details class="faq-item">
           <summary><span class="faq-q">Q</span><span>読みとく国語とは何ですか？</span><span class="faq-mark"></span></summary>
-          <p class="faq-a">良書にたくさん触れることで、語彙力・表現力を育てる国語の講座です。朗読音声つきなので、読書が苦手なお子さまでも楽しく読み進められます。読書の前後には語彙シートに取り組み、「生きた言葉」を育みます。対象は小1〜小6です。</p>
+          <p class="faq-a">良書にたくさん触れることで、表現力・語彙力・読解力を育てる国語の講座です。朗読音声つきなので、読書が苦手なお子さまでも楽しく読み進められます。読書の前後には語彙シートに取り組み、「生きた言葉」を育みます。対象は小1〜小6です。</p>
         </details>
         <details class="faq-item">
           <summary><span class="faq-q">Q</span><span>個別指導の1対1と1対2は何が違いますか？</span><span class="faq-mark"></span></summary>
@@ -864,7 +909,7 @@
         <caption>コース早見表</caption>
         <thead><tr><th scope="col">コース</th><th scope="col">対象学年</th><th scope="col">形式</th><th scope="col">内容</th></tr></thead>
         <tbody>
-          <tr><th scope="row">アビリティプログラム<br>（パズル算数・読みとく国語）</th><td>小1〜小6</td><td>講座</td><td>パズル算数は、仮説と検証をくりかえして答えを導き、「気づく」センスと「解く」チカラを育てます。読みとく国語は、良書にたくさん触れて語彙力・表現力を育てます。</td></tr>
+          <tr><th scope="row">アビリティプログラム<br>（パズル算数・読みとく国語）</th><td>小1〜小6</td><td>講座</td><td>パズル算数は、仮説と検証をくりかえして答えを導き、「気づく」センスと「解く」チカラを育てます。読みとく国語は、良書にたくさん触れて表現力・語彙力・読解力を育てます。</td></tr>
           <tr><th scope="row">中学受験<br>（アドバンスドプログラム）</th><td>小3〜小6</td><td>少人数グループ指導（1教科から）</td><td>私立中学受験と都立中高一貫校の受検に対応。小6の夏以降は、適性検査の記述対策を個別指導と組み合わせて学べます。</td></tr>
           <tr><th scope="row">個別指導 1対1</th><td>小3〜中3</td><td>マンツーマン</td><td>御三家中学・早慶附属・国立中高などを志望する方向け。キャリアと実績を持つエキスパート講師が担当します。</td></tr>
           <tr><th scope="row">個別指導 1対2</th><td>小3〜中3</td><td>先生1人に生徒2人</td><td>1回80分、1教科につき毎週1回。前日までの連絡で振替授業が可能。グループ指導との併用もできます。</td></tr>
